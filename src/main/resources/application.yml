@@ -1,0 +1,22 @@
+# Tomcat运行端口配置
+server:
+  port: 9090
+  context-path: /oerts
+
+# Mybatis配置 
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+# 输出SQL语句配置  
+logging:
+  level:
+    org.springframework: WARN
+    com.njfu.bysj.oerts.mapper.ExamineeMapper: DEBUG
+
+# 数据库配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/oerts?useSSL=true
+    username: root
+    password: 123456

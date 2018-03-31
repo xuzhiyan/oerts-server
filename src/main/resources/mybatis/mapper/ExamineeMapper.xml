@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.ExamineeMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.ExamineeEntity">
+		<id column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR"/>
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+		<result column="USER_SEX" property="userSex" jdbcType="INTEGER"/>
+		<result column="USER_PROFESSION" property="userProfession" jdbcType="VARCHAR"/>
+		<result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR"/>
+		<result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR"/>
+		<result column="USER_PHOTO" property="userPhoto" jdbcType="VARCHAR"/>
+		<result column="RESIDENTIAL_ADDRESS" property="residentialAddress" jdbcType="VARCHAR"/>
+		<result column="EMAIL_ADDRESS" property="emailAddress" jdbcType="VARCHAR"/>
+		<result column="USER_BALANCE" property="userBalance" jdbcType="VARCHAR"/>
+		<result column="LAST_LOGIN_TIME" property="lastLogintime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	 
+	<sql id="Base_Column_List" >
+        ID_CARD,USER_PHONE,USER_NAME,USER_SEX,USER_PROFESSION,LOGIN_PASSWORD,PAY_PASSWORD,USER_PHOTO,RESIDENTIAL_ADDRESS,EMAIL_ADDRESS,USER_BALANCE,LAST_LOGIN_TIME
+    </sql> 
+    
+    <select id="getAll" resultMap="BaseResultMap">
+       SELECT 
+       *
+	   FROM T_EXAMINEE
+    </select>
+    
+    <select id="selectCount" resultType="INTEGER">
+    	SELECT
+    	COUNT(*)
+    	FROM T_EXAMINEE	
+    </select>
+</mapper>
