@@ -32,4 +32,12 @@
     	COUNT(*)
     	FROM T_EXAMINEE	
     </select>
+    
+    <select id="loginByPassw" parameterType="java.lang.String" resultType="INTEGER">
+    	SELECT 
+    		COUNT(*)
+    	FROM T_EXAMINEE
+    	WHERE 
+    		USER_PHONE = #{userPhone} AND LOGIN_PASSWORD = #{password}
+    </select>
 </mapper>

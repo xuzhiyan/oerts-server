@@ -19,11 +19,11 @@ import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamineeService;
 
 /**
- * @ClassName:     	ExamineeServiceImpl
- * @Description:	TODO
+ * @ClassName: ExamineeServiceImpl
+ * @Description: TODO
  *
- * @author:    		徐至彦
- * @date:        	2018年1月11日 下午11:12:21
+ * @author: 徐至彦
+ * @date: 2018年1月11日 下午11:12:21
  *
  */
 @Service
@@ -31,16 +31,25 @@ public class ExamineeServiceImpl implements ExamineeService {
 
 	@Autowired
 	private ExamineeMapper examineeMapper;
-	
+
 	@Override
 	public List<ExamineeEntity> getAll() {
-		
+
 		return examineeMapper.getAll();
 	}
-	
+
 	@Override
 	public int selectCount() {
-		
+
 		return examineeMapper.selectCount();
+	}
+
+	@Override
+	public boolean loginByPassw(String userPhone, String password) {
+		if (examineeMapper.loginByPassw(userPhone, password) == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

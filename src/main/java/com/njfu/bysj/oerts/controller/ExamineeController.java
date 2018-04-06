@@ -9,6 +9,13 @@
  */
 package com.njfu.bysj.oerts.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.njfu.bysj.oerts.entity.ExamineeEntity;
+import com.njfu.bysj.oerts.service.ExamineeService;
 
 /**
  * @ClassName: ExamineeController
@@ -18,7 +25,15 @@ package com.njfu.bysj.oerts.controller;
  * @date: 2018年1月11日 下午11:15:29
  *
  */
+@RestController
 public class ExamineeController {
 
+	@Autowired
+	private ExamineeService examineeService;
 
+	@PostMapping("/loginByPassw")
+	public boolean loginByPassw(@RequestBody ExamineeEntity userLogin) {
+		System.out.println(examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword()));
+		return examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword());
+	}
 }

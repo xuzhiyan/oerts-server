@@ -14,16 +14,18 @@ import java.util.List;
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
 
 /**
- * @ClassName:     	ExamineeService
- * @Description:	TODO
+ * @ClassName: ExamineeService
+ * @Description: TODO
  *
- * @author:    		徐至彦
- * @date:        	2018年1月11日 下午11:11:07
+ * @author: 徐至彦
+ * @date: 2018年1月11日 下午11:11:07
  *
  */
 public interface ExamineeService {
-	
+
 	List<ExamineeEntity> getAll();
-	
+
 	int selectCount();
+
+	boolean loginByPassw(String userPhone, String password);
 }
