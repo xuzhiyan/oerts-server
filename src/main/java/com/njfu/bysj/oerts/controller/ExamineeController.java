@@ -31,9 +31,15 @@ public class ExamineeController {
 	@Autowired
 	private ExamineeService examineeService;
 
-	@PostMapping("/loginByPassw")
+	@PostMapping("/loginbypassw")
 	public boolean loginByPassw(@RequestBody ExamineeEntity userLogin) {
-		System.out.println(examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword()));
-		return examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword());
+//		System.out.println(examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword()));
+		return examineeService.loginByPassw(userLogin);
+	}
+	
+	@PostMapping("/registbypassw")
+	public boolean registByPassw(@RequestBody ExamineeEntity userRegist) {
+		examineeService.registByPassw(userRegist);
+		return false;
 	}
 }

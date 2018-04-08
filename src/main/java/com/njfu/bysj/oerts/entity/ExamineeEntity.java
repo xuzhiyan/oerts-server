@@ -13,6 +13,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * @ClassName:     	ExamineeEntity
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @date:        	2018年1月11日 下午11:00:17
  *
  */
+@JsonInclude(Include.NON_EMPTY)
 public class ExamineeEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

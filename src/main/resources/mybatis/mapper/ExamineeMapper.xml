@@ -33,11 +33,18 @@
     	FROM T_EXAMINEE	
     </select>
     
-    <select id="loginByPassw" parameterType="java.lang.String" resultType="INTEGER">
+    <select id="loginByPassw" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity" resultMap="BaseResultMap">
     	SELECT 
-    		COUNT(*)
+    		*
     	FROM T_EXAMINEE
     	WHERE 
-    		USER_PHONE = #{userPhone} AND LOGIN_PASSWORD = #{password}
+    		USER_PHONE = #{userPhone} AND LOGIN_PASSWORD = #{loginPassword}
     </select>
+    
+    <insert id="registByPassw" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
+    	INSERT INTO T_EXAMINEE
+    		(USER_PHONE, USER_NAME, LOGIN_PASSWORD)
+    	VALUES 
+    		(#{userPhone}, #{userName}, #{loginPassword})
+    </insert>
 </mapper>

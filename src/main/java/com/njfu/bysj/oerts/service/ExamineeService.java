@@ -27,5 +27,7 @@ public interface ExamineeService {
 
 	int selectCount();
 
-	boolean loginByPassw(String userPhone, String password);
+	boolean loginByPassw(ExamineeEntity userLogin);
+	
+	boolean registByPassw(ExamineeEntity userRegist);
 }

@@ -45,11 +45,17 @@ public class ExamineeServiceImpl implements ExamineeService {
 	}
 
 	@Override
-	public boolean loginByPassw(String userPhone, String password) {
-		if (examineeMapper.loginByPassw(userPhone, password) == 1) {
+	public boolean loginByPassw(ExamineeEntity userLogin) {
+		if (examineeMapper.loginByPassw(userLogin) != null) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean registByPassw(ExamineeEntity userRegist) {
+		System.out.println(examineeMapper.registByPassw(userRegist));
+		return false;
 	}
 }

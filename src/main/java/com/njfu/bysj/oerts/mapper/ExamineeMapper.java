@@ -29,5 +29,8 @@ public interface ExamineeMapper {
 
 	int selectCount();
 
-	int loginByPassw(@Param("userPhone") String userPhone, @Param("password") String password);
+//	ExamineeEntity loginByPassw(@Param("userPhone") String userPhone, @Param("password") String password);
+	ExamineeEntity loginByPassw(ExamineeEntity userLogin);
+	
+	int registByPassw(ExamineeEntity userRegist);
 }
