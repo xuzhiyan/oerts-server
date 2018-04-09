@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.ExamManagementMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.ExamManagementEntity">
+		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
+		<result column="EXAM_NAME" property="examName" jdbcType="VARCHAR"/>
+		<result column="COST" property="cost" jdbcType="INTEGER"/>
+		<result column="MAX_NUM" property="maxNum" jdbcType="INTEGER"/>
+		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_FROM" property="examTimeFrom" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
+		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+        EXAM_ID,EXAM_NAME,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_FROM,EXAM_TIME_TO,REG_TIME_FROM,REG_TIME_TO
+    </sql>
+    
+    <select id="getAllExams" resultMap="BaseResultMap">
+    	SELECT
+    		<include refid="Base_Column_List"/>
+    	FROM
+    		T_EXAM_MANAGEMENT
+    </select>
+	
+</mapper>
