@@ -33,7 +33,6 @@ public class ExamineeController {
 
 	@PostMapping("/loginbypassw")
 	public boolean loginByPassw(@RequestBody ExamineeEntity userLogin) {
-//		System.out.println(examineeService.loginByPassw(userLogin.getUserPhone(), userLogin.getLoginPassword()));
 		return examineeService.loginByPassw(userLogin);
 	}
 	

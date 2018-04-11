@@ -34,7 +34,6 @@ public class ExamManagementController {
 	
 	@GetMapping("/exams")
 	public List<ExamManagementEntity> getAllExams() {
-		
 		return examManagementService.getAllExams();
 	}
 }
