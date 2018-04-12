@@ -11,7 +11,7 @@ mybatis:
 logging:
   level:
     org.springframework: WARN
-    com.njfu.bysj.oerts.mapper.ExamineeMapper: DEBUG
+    com.njfu.bysj.oerts.mapper: DEBUG
 
 # 数据库配置
 spring:
