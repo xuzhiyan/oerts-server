@@ -24,4 +24,6 @@ import com.njfu.bysj.oerts.entity.ExamManagementEntity;
 public interface ExamManagementMapper {
 
 	List<ExamManagementEntity> getAllExams();
+	
+	ExamManagementEntity getExamById(String examId);
 }

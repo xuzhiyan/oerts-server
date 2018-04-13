@@ -74,7 +74,16 @@ insert into T_EXAM_MANAGEMENT
 values
 ('1000005','2018年上半年软考-高级', 140, 10, '', now(), now(), now(), now())
 
+#报名表
+CREATE TABLE IF NOT EXISTS T_ENROLL_MANAGEMENT (
 
+);
+
+身份证
+准考证
+姓名
+手机号
+状态（是否付费）
 
 
 

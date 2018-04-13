@@ -23,5 +23,13 @@
     	FROM
     		T_EXAM_MANAGEMENT
     </select>
+    
+    <select id="getExamById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	SELECT
+    		<include refid="Base_Column_List"/>
+    	FROM
+    		T_EXAM_MANAGEMENT
+    	WHERE EXAM_ID = #{examId}
+    </select>
 	
 </mapper>

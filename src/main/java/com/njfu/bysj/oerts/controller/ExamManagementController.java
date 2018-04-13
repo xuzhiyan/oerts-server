@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.njfu.bysj.oerts.entity.ExamManagementEntity;
@@ -35,5 +36,10 @@ public class ExamManagementController {
 	@GetMapping("/exams")
 	public List<ExamManagementEntity> getAllExams() {
 		return examManagementService.getAllExams();
+	}
+	
+	@GetMapping("/exam/{examId}")
+	public ExamManagementEntity getExamById(@PathVariable String examId) {
+		return examManagementService.getExamById(examId);
 	}
 }

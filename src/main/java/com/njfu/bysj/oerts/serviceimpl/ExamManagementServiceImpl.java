@@ -36,4 +36,9 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 		return examManagementMapper.getAllExams();
 	}
 
+	@Override
+	public ExamManagementEntity getExamById(String examId) {
+		return examManagementMapper.getExamById(examId);
+	}
+
 }
