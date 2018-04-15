@@ -40,10 +40,38 @@
     		USER_PHONE = #{userPhone} AND LOGIN_PASSWORD = #{loginPassword}
     </select>
     
+	<select id="countByUserPhone" parameterType="java.lang.String" resultType="INTEGER">
+		SELECT 
+			COUNT(*)
+		FROM T_EXAMINEE
+		WHERE 
+    		USER_PHONE = #{userPhone}
+	</select>
+	
+	<select id="getByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+			*
+		FROM T_EXAMINEE
+		WHERE 
+    		USER_PHONE = #{userPhone}
+	</select>
+    
     <insert id="registByPassw" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
     	INSERT INTO T_EXAMINEE
     		(USER_PHONE, USER_NAME, LOGIN_PASSWORD)
     	VALUES 
     		(#{userPhone}, #{userName}, #{loginPassword})
     </insert>
+    
+    <update id="updateByUserPhone" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
+    	UPDATE T_EXAMINEE
+    		SET USER_PHONE = #{userPhone},
+    			USER_NAME = #{userName},
+    			USER_SEX = #{userSex},
+    			ID_CARD = #{idCard},
+    			USER_PROFESSION = #{userProfession},
+    			EMAIL_ADDRESS = #{emailAddress},
+    			RESIDENTIAL_ADDRESS = #{residentialAddress}
+    	WHERE USER_PHONE = #{userPhone}
+    </update>
 </mapper>

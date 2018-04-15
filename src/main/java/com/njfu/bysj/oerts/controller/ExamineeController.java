@@ -10,12 +10,16 @@
 package com.njfu.bysj.oerts.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
+import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamineeService;
+import com.njfu.bysj.oerts.utils.JsonUtil;
 
 /**
  * @ClassName: ExamineeController
@@ -32,13 +36,39 @@ public class ExamineeController {
 	private ExamineeService examineeService;
 
 	@PostMapping("/loginbypassw")
-	public boolean loginByPassw(@RequestBody ExamineeEntity userLogin) {
-		return examineeService.loginByPassw(userLogin);
+	public JsonResult loginByPassw(@RequestBody ExamineeEntity userLogin) {
+		if (examineeService.loginByPassw(userLogin)) {
+			return JsonUtil.success();
+		} else {
+			return JsonUtil.failed("没有对应用户数据");
+		}
 	}
-	
+
 	@PostMapping("/registbypassw")
-	public boolean registByPassw(@RequestBody ExamineeEntity userRegist) {
-		examineeService.registByPassw(userRegist);
-		return false;
+	public JsonResult registByPassw(@RequestBody ExamineeEntity userRegist) {
+		if (examineeService.registByPassw(userRegist)) {
+			return JsonUtil.success();
+		} else {
+			return JsonUtil.failed("注册失败");
+		}
+	}
+
+	@PostMapping("/updatebyuserphone")
+	public JsonResult updateByUserPhone(@RequestBody ExamineeEntity userInfo) {
+		if (examineeService.updateByUserPhone(userInfo)) {
+			return JsonUtil.success();
+		} else {
+			return JsonUtil.failed("用户数据失败");
+		}
+	}
+
+	@GetMapping("/countbyuserphone/{userPhone}")
+	public JsonResult countByUserPhone(@PathVariable String userPhone) {
+		return JsonUtil.success(examineeService.countByUserPhone(userPhone));
+	}
+
+	@GetMapping("/getbyuserphone/{userPhone}")
+	public JsonResult getByUserPhone(@PathVariable String userPhone) {
+		return JsonUtil.success(examineeService.getByUserPhone(userPhone));
 	}
 }

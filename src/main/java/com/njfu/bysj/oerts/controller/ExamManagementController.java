@@ -9,15 +9,15 @@
  */
 package com.njfu.bysj.oerts.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.njfu.bysj.oerts.entity.ExamManagementEntity;
+import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamManagementService;
+import com.njfu.bysj.oerts.utils.JsonUtil;
 
 /**
  * @ClassName:     	ExamManagementController
@@ -34,12 +34,12 @@ public class ExamManagementController {
 	private ExamManagementService examManagementService;
 	
 	@GetMapping("/exams")
-	public List<ExamManagementEntity> getAllExams() {
-		return examManagementService.getAllExams();
+	public JsonResult getAllExams() {
+		return JsonUtil.success(examManagementService.getAllExams());
 	}
 	
 	@GetMapping("/exam/{examId}")
-	public ExamManagementEntity getExamById(@PathVariable String examId) {
-		return examManagementService.getExamById(examId);
+	public JsonResult getExamById(@PathVariable String examId) {
+		return JsonUtil.success(examManagementService.getExamById(examId));
 	}
 }

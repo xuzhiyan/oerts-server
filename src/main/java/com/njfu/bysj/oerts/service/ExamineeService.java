@@ -29,5 +29,11 @@ public interface ExamineeService {
 
 	boolean loginByPassw(ExamineeEntity userLogin);
 	
+	int countByUserPhone(String userPhone);
+	
 	boolean registByPassw(ExamineeEntity userRegist);
+	
+	ExamineeEntity getByUserPhone(String userPhone);
+	
+	boolean updateByUserPhone(ExamineeEntity userInfo);
 }

@@ -11,8 +11,6 @@ package com.njfu.bysj.oerts.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
 
 /**
@@ -31,5 +29,11 @@ public interface ExamineeMapper {
 
 	ExamineeEntity loginByPassw(ExamineeEntity userLogin);
 	
+	int countByUserPhone(String userPhone);
+	
 	int registByPassw(ExamineeEntity userRegist);
+
+	ExamineeEntity getByUserPhone(String userPhone);
+	
+	int updateByUserPhone(ExamineeEntity userInfo);
 }

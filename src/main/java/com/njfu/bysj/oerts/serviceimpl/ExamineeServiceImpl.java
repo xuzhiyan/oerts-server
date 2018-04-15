@@ -55,7 +55,30 @@ public class ExamineeServiceImpl implements ExamineeService {
 
 	@Override
 	public boolean registByPassw(ExamineeEntity userRegist) {
-		System.out.println(examineeMapper.registByPassw(userRegist));
-		return false;
+		if (examineeMapper.countByUserPhone(userRegist.getUserPhone()) == 0) {
+			examineeMapper.registByPassw(userRegist);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int countByUserPhone(String userPhone) {
+		return examineeMapper.countByUserPhone(userPhone);
+	}
+
+	@Override
+	public ExamineeEntity getByUserPhone(String userPhone) {
+		return examineeMapper.getByUserPhone(userPhone);
+	}
+
+	@Override
+	public boolean updateByUserPhone(ExamineeEntity userInfo) {
+		if (examineeMapper.updateByUserPhone(userInfo) == 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

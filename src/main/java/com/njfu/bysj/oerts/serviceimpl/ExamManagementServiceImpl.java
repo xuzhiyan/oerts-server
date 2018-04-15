@@ -19,11 +19,11 @@ import com.njfu.bysj.oerts.mapper.ExamManagementMapper;
 import com.njfu.bysj.oerts.service.ExamManagementService;
 
 /**
- * @ClassName:     	ExamManagementServiceimpl
- * @Description:	TODO
+ * @ClassName: ExamManagementServiceimpl
+ * @Description: TODO
  *
- * @author:    		徐至彦
- * @date:        	2018年4月9日 下午11:44:48
+ * @author: 徐至彦
+ * @date: 2018年4月9日 下午11:44:48
  *
  */
 @Service
@@ -31,6 +31,7 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 
 	@Autowired
 	private ExamManagementMapper examManagementMapper;
+
 	@Override
 	public List<ExamManagementEntity> getAllExams() {
 		return examManagementMapper.getAllExams();

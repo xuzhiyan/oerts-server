@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
+import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamineeService;
+import com.njfu.bysj.oerts.utils.JsonUtil;
 
 /**
  * @ClassName: BaseController
@@ -33,7 +35,7 @@ public class BaseController {
 	private ExamineeService examineeService;
 
 	@GetMapping("/all")
-	public List<ExamineeEntity> getall() {
-		return examineeService.getAll();
+	public JsonResult getall() {
+		return JsonUtil.success(examineeService.getAll());
 	}
 }

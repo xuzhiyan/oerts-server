@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @date:        	2018年4月9日 下午11:35:19
  *
  */
-@JsonInclude(Include.NON_EMPTY)
 public class ExamManagementEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

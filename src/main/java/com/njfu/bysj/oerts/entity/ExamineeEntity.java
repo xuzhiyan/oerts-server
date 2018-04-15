@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * @date:        	2018年1月11日 下午11:00:17
  *
  */
-@JsonInclude(Include.NON_EMPTY)
 public class ExamineeEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
