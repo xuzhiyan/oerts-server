@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.ExamRegistrationMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
+		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
+		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+	</resultMap>
+	 
+	<sql id="Base_Column_List" >
+        ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE
+    </sql> 
+    
+    <insert id="examRegistByIdCardAndExamID" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
+    	INSERT INTO T_EXAM_REGISTRATION
+    	VALUES (#{idCard}, #{examId}, #{admissionTicket}, #{status}, #{score})
+    </insert>
+    
+</mapper>

@@ -31,6 +31,8 @@ public interface ExamineeMapper {
 	
 	int countByUserPhone(String userPhone);
 	
+	int countByIdCard(String idCard);
+	
 	int registByPassw(ExamineeEntity userRegist);
 
 	ExamineeEntity getByUserPhone(String userPhone);

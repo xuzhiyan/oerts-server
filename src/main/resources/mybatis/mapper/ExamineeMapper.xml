@@ -48,6 +48,14 @@
     		USER_PHONE = #{userPhone}
 	</select>
 	
+	<select id="countByIdCard" parameterType="java.lang.String" resultType="INTEGER">
+		SELECT 
+			COUNT(*)
+		FROM T_EXAMINEE
+		WHERE 
+    		ID_CARD = #{idCard}
+	</select>
+	
 	<select id="getByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
 		SELECT 
 			*
