@@ -34,7 +34,19 @@ public class ExamRegistrationController {
 	
 	@GetMapping("/registration/{examId}/{userPhone}")
 	public JsonResult examRegistByIdCardAndExamID(@PathVariable String examId, @PathVariable String userPhone) {
-		System.out.println(examId+userPhone);
-		return JsonUtil.success(examRegistrationService.examRegistByIdCardAndExamID(examId, userPhone));
+		if (examRegistrationService.examRegistByIdCardAndExamID(examId, userPhone)) {
+			return JsonUtil.success();
+		} else {
+			return JsonUtil.failed("报名失败");
+		}
+	}
+	
+	@GetMapping("/countregist/{examId}/{userPhone}")
+	public JsonResult countByIdCardAndExamID(@PathVariable String examId, @PathVariable String userPhone) {
+		if (examRegistrationService.countByIdCardAndExamID(examId, userPhone)) {
+			return JsonUtil.success();
+		} else {
+			return JsonUtil.failed("不能重复报名");
+		}
 	}
 }

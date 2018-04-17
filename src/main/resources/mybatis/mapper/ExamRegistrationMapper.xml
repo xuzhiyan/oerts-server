@@ -13,6 +13,14 @@
         ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE
     </sql> 
     
+    <select id="countByIdCardAndExamID" parameterType="java.lang.String" resultType="INTEGER">
+    	SELECT 
+    		COUNT(*)
+    	FROM
+    		T_EXAM_REGISTRATION
+    	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
+    </select>
+    
     <insert id="examRegistByIdCardAndExamID" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
     	INSERT INTO T_EXAM_REGISTRATION
     	VALUES (#{idCard}, #{examId}, #{admissionTicket}, #{status}, #{score})

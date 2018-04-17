@@ -20,4 +20,6 @@ package com.njfu.bysj.oerts.service;
 public interface ExamRegistrationService {
 
 	boolean examRegistByIdCardAndExamID(String examId, String userPhone);
+	
+	boolean countByIdCardAndExamID(String examId, String userPhone);
 }

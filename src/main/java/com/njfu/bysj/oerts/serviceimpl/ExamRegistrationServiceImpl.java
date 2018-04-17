@@ -50,4 +50,13 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		}
 	}
 
+	@Override
+	public boolean countByIdCardAndExamID(String examId, String userPhone) {
+		ExamineeEntity userInfo = examineeMapper.getByUserPhone(userPhone);
+		if (examRegistrationMapper.countByIdCardAndExamID(userInfo.getIdCard(), examId) == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
