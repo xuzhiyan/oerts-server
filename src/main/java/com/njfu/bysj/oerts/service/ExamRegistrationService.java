@@ -9,6 +9,10 @@
  */
 package com.njfu.bysj.oerts.service;
 
+import java.util.List;
+
+import com.njfu.bysj.oerts.bean.CompleteRegistExam;
+
 /**
  * @ClassName:     	ExamRegistrationService
  * @Description:	TODO
@@ -19,7 +23,9 @@ package com.njfu.bysj.oerts.service;
  */
 public interface ExamRegistrationService {
 
-	boolean examRegistByIdCardAndExamID(String examId, String userPhone);
+	boolean examRegistByIdCardAndExamID(String examId, String idCard);
 	
-	boolean countByIdCardAndExamID(String examId, String userPhone);
+	boolean countByIdCardAndExamID(String examId, String idCard);
+	
+	List<CompleteRegistExam> completeResgistList(String idCard);
 }

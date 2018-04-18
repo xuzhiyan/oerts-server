@@ -8,6 +8,24 @@
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
 	</resultMap>
+	
+	<resultMap id="CompleteResgistMap" type="com.njfu.bysj.oerts.bean.CompleteRegistExam">
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
+		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
+		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<!-- 考试信息表字段添加 -->
+		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
+		<result column="EXAM_NAME" property="examName" jdbcType="VARCHAR"/>
+		<result column="COST" property="cost" jdbcType="INTEGER"/>
+		<result column="MAX_NUM" property="maxNum" jdbcType="INTEGER"/>
+		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_FROM" property="examTimeFrom" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
+		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+	</resultMap>
 	 
 	<sql id="Base_Column_List" >
         ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE
@@ -25,5 +43,14 @@
     	INSERT INTO T_EXAM_REGISTRATION
     	VALUES (#{idCard}, #{examId}, #{admissionTicket}, #{status}, #{score})
     </insert>
+    
+    <select id="completeResgistList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
+    	SELECT
+    		*
+    	FROM T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAM_MANAGEMENT TEM 
+    		ON TER.EXAM_ID = TEM.EXAM_ID
+    	WHERE TER.ID_CARD = #{idCard}
+    </select>
     
 </mapper>

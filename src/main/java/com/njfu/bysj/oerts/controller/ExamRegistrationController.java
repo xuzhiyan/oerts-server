@@ -32,21 +32,26 @@ public class ExamRegistrationController {
 	@Autowired
 	private ExamRegistrationService examRegistrationService;
 	
-	@GetMapping("/registration/{examId}/{userPhone}")
-	public JsonResult examRegistByIdCardAndExamID(@PathVariable String examId, @PathVariable String userPhone) {
-		if (examRegistrationService.examRegistByIdCardAndExamID(examId, userPhone)) {
+	@GetMapping("/registration/{examId}/{idCard}")
+	public JsonResult examRegistByIdCardAndExamID(@PathVariable String examId, @PathVariable String idCard) {
+		if (examRegistrationService.examRegistByIdCardAndExamID(examId, idCard)) {
 			return JsonUtil.success();
 		} else {
 			return JsonUtil.failed("报名失败");
 		}
 	}
 	
-	@GetMapping("/countregist/{examId}/{userPhone}")
-	public JsonResult countByIdCardAndExamID(@PathVariable String examId, @PathVariable String userPhone) {
-		if (examRegistrationService.countByIdCardAndExamID(examId, userPhone)) {
+	@GetMapping("/countregist/{examId}/{idCard}")
+	public JsonResult countByIdCardAndExamID(@PathVariable String examId, @PathVariable String idCard) {
+		if (examRegistrationService.countByIdCardAndExamID(examId, idCard)) {
 			return JsonUtil.success();
 		} else {
 			return JsonUtil.failed("不能重复报名");
 		}
+	}
+	
+	@GetMapping("/testcompletelist/{idCard}")
+	public JsonResult completeResgistList(@PathVariable String idCard) {
+		return JsonUtil.success(examRegistrationService.completeResgistList(idCard));
 	}
 }

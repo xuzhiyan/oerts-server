@@ -9,8 +9,11 @@
  */
 package com.njfu.bysj.oerts.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 /**
@@ -26,4 +29,6 @@ public interface ExamRegistrationMapper {
 	int examRegistByIdCardAndExamID(ExamRegistrationEntity registration);
 	
 	int countByIdCardAndExamID(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
+	
+	List<CompleteRegistExam> completeResgistList(String idCard);
 }

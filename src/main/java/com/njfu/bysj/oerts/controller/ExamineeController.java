@@ -38,7 +38,7 @@ public class ExamineeController {
 	@PostMapping("/loginbypassw")
 	public JsonResult loginByPassw(@RequestBody ExamineeEntity userLogin) {
 		if (examineeService.loginByPassw(userLogin)) {
-			return JsonUtil.success();
+			return JsonUtil.success(examineeService.getByUserPhone(userLogin.getUserPhone()));
 		} else {
 			return JsonUtil.failed("没有对应用户数据");
 		}

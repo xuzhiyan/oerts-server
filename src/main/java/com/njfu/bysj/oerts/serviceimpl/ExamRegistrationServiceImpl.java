@@ -9,9 +9,12 @@
  */
 package com.njfu.bysj.oerts.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
 import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
@@ -31,15 +34,12 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 	@Autowired
 	private ExamRegistrationMapper examRegistrationMapper;
-	@Autowired
-	private ExamineeMapper examineeMapper;
 
 	@Override
-	public boolean examRegistByIdCardAndExamID(String examId, String userPhone) {
-		ExamineeEntity userInfo = examineeMapper.getByUserPhone(userPhone);
+	public boolean examRegistByIdCardAndExamID(String examId, String idCard) {
 		ExamRegistrationEntity registration = new ExamRegistrationEntity();
 		registration.setExamId(examId);
-		registration.setIdCard(userInfo.getIdCard());
+		registration.setIdCard(idCard);
 		registration.setStatus("00");
 		registration.setAdmissionTicket("");
 		registration.setScore(0);
@@ -51,12 +51,16 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public boolean countByIdCardAndExamID(String examId, String userPhone) {
-		ExamineeEntity userInfo = examineeMapper.getByUserPhone(userPhone);
-		if (examRegistrationMapper.countByIdCardAndExamID(userInfo.getIdCard(), examId) == 0) {
+	public boolean countByIdCardAndExamID(String examId, String idCard) {
+		if (examRegistrationMapper.countByIdCardAndExamID(idCard, examId) == 0) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<CompleteRegistExam> completeResgistList(String idCard) {
+		return examRegistrationMapper.completeResgistList(idCard);
 	}
 }
