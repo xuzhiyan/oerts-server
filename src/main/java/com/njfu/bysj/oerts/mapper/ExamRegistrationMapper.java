@@ -17,18 +17,26 @@ import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 /**
- * @ClassName:     	ExamRegistrationMapper
- * @Description:	TODO
+ * @ClassName: ExamRegistrationMapper
+ * @Description: TODO
  *
- * @author:    		徐至彦
- * @date:        	2018年4月17日 下午9:55:42
+ * @author: 徐至彦
+ * @date: 2018年4月17日 下午9:55:42
  *
  */
 public interface ExamRegistrationMapper {
 
 	int examRegistByIdCardAndExamID(ExamRegistrationEntity registration);
-	
+
 	int countByIdCardAndExamID(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
-	
+
 	List<CompleteRegistExam> completeResgistList(String idCard);
+
+	List<ExamRegistrationEntity> examReview();
+
+	int updateReview(ExamRegistrationEntity registration);
+
+	int deleteByIdCardAndExamID(ExamRegistrationEntity delete);
+
+	List<CompleteRegistExam> getPayList(@Param(value = "idCard") String idCard, @Param(value = "status") String status);
 }

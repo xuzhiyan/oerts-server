@@ -12,6 +12,7 @@ package com.njfu.bysj.oerts;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @ClassName:     	OertsApplication
@@ -23,6 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.njfu.bysj.oerts.mapper")
+@EnableScheduling 
 public class OertsApplication {
 
 	public static void main(String[] args) {

@@ -63,4 +63,30 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	public List<CompleteRegistExam> completeResgistList(String idCard) {
 		return examRegistrationMapper.completeResgistList(idCard);
 	}
+
+	@Override
+	public void examReview() {
+		List<ExamRegistrationEntity> reviewEntity = examRegistrationMapper.examReview();
+		// if 审核成功 status = 10
+		for (ExamRegistrationEntity entities : reviewEntity) {
+			entities.setStatus("10");
+			examRegistrationMapper.updateReview(entities);
+		}
+		// 审核失败 status = 11
+
+	}
+
+	@Override
+	public boolean deleteByIdCardAndExamID(ExamRegistrationEntity delete) {
+		if (examRegistrationMapper.deleteByIdCardAndExamID(delete) != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public List<CompleteRegistExam> getPayList(String idCard, String status) {
+		return examRegistrationMapper.getPayList(idCard, status);
+	}
 }

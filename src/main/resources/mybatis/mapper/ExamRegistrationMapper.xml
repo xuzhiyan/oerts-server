@@ -53,4 +53,38 @@
     	WHERE TER.ID_CARD = #{idCard}
     </select>
     
+    <select id="examReview" resultMap="BaseResultMap">
+    	SELECT
+    		ID_CARD, EXAM_ID
+    	FROM
+    		T_EXAM_REGISTRATION
+    	WHERE STATUS = '00'
+    </select>
+    
+    <select id="getPayList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
+    	SELECT 
+    		TEM.EXAM_ID,
+    		TEM.EXAM_NAME,
+    		TEM.COST,
+    		TEM.EXAM_TIME_FROM,
+    		TEM.EXAM_TIME_TO,
+    		TEM.REG_TIME_TO
+    	FROM T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAM_MANAGEMENT TEM 
+    		ON TER.EXAM_ID = TEM.EXAM_ID
+    	WHERE TER.ID_CARD = #{idCard} AND TER.STATUS = #{status}
+    </select>
+    
+    <update id="updateReview" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
+    	UPDATE T_EXAM_REGISTRATION
+    		SET STATUS = #{status}
+    	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
+    </update>
+    
+    <delete id="deleteByIdCardAndExamID" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
+    	DELETE 
+    		FROM T_EXAM_REGISTRATION
+    	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
+    </delete>
+    
 </mapper>
