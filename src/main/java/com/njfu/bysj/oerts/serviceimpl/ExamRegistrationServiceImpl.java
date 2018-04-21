@@ -89,4 +89,9 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	public List<CompleteRegistExam> getPayList(String idCard, String status) {
 		return examRegistrationMapper.getPayList(idCard, status);
 	}
+
+	@Override
+	public CompleteRegistExam getScoreByAdmissionTicket(String admissionTicket) {
+		return examRegistrationMapper.getScoreByAdmissionTicket(admissionTicket);
+	}
 }

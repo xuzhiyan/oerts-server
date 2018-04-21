@@ -75,6 +75,17 @@
     	WHERE TER.ID_CARD = #{idCard} AND TER.STATUS = #{status}
     </select>
     
+    <select id="getScoreByAdmissionTicket" parameterType="java.lang.String" resultMap="CompleteResgistMap">
+    	SELECT 
+			TEM.EXAM_NAME,
+    		TER.SCORE
+    	FROM
+    		T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAM_MANAGEMENT TEM
+    		ON TER.EXAM_ID = TEM.EXAM_ID
+    	WHERE ADMISSION_TICKET = #{admissionTicket}
+    </select>
+    
     <update id="updateReview" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
     	UPDATE T_EXAM_REGISTRATION
     		SET STATUS = #{status}

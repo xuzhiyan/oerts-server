@@ -9,6 +9,8 @@
  */
 package com.njfu.bysj.oerts.controller;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
@@ -70,6 +73,15 @@ public class ExamRegistrationController {
 		} else {
 			return JsonUtil.failed("删除失败");
 		}
+	}
 
+	@GetMapping("/registration/score/{admissionTicket}")
+	public JsonResult getScoreByAdmissionTicket(@PathVariable String admissionTicket) {
+		CompleteRegistExam scoreEntity = examRegistrationService.getScoreByAdmissionTicket(admissionTicket);
+		if (scoreEntity == null) {
+			return JsonUtil.failed("没有对应数据");
+		} else {
+			return JsonUtil.success(scoreEntity);
+		}
 	}
 }

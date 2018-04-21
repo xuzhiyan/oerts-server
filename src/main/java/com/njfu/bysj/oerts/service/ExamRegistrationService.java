@@ -11,6 +11,8 @@ package com.njfu.bysj.oerts.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
@@ -35,4 +37,6 @@ public interface ExamRegistrationService {
 	boolean deleteByIdCardAndExamID(ExamRegistrationEntity delete);
 
 	List<CompleteRegistExam> getPayList(String idCard, String status);
+	
+	CompleteRegistExam getScoreByAdmissionTicket(String admissionTicket);
 }

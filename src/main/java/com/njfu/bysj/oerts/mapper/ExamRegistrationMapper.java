@@ -39,4 +39,6 @@ public interface ExamRegistrationMapper {
 	int deleteByIdCardAndExamID(ExamRegistrationEntity delete);
 
 	List<CompleteRegistExam> getPayList(@Param(value = "idCard") String idCard, @Param(value = "status") String status);
+
+	CompleteRegistExam getScoreByAdmissionTicket(@Param(value = "admissionTicket") String admissionTicket);
 }
