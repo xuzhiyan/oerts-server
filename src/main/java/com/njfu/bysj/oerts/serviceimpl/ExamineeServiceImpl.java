@@ -75,12 +75,14 @@ public class ExamineeServiceImpl implements ExamineeService {
 
 	@Override
 	public boolean updateByUserPhone(ExamineeEntity userInfo) {
-		if (examineeMapper.countByIdCard(userInfo.getIdCard()) == 0) {
-			examineeMapper.updateByUserPhone(userInfo);
-			return true;
-		} else {
-			return false;
-		}
+//		if (examineeMapper.countByIdCard(userInfo.getIdCard()) == 0) {
+//			examineeMapper.updateByUserPhone(userInfo);
+//			return true;
+//		} else {
+//			return false;
+//		}
+		examineeMapper.updateByUserPhone(userInfo);
+		return true;
 	}
 
 	@Override
