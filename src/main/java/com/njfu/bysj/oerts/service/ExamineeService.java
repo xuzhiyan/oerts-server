@@ -31,7 +31,7 @@ public interface ExamineeService {
 	
 	int countByUserPhone(String userPhone);
 	
-	int countByIdCard(String idCard);
+	int countByIdCard(String idCard, String userPhone);
 	
 	boolean registByPassw(ExamineeEntity userRegist);
 	

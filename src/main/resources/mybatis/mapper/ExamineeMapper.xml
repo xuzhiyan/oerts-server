@@ -53,7 +53,7 @@
 			COUNT(*)
 		FROM T_EXAMINEE
 		WHERE 
-    		ID_CARD = #{idCard} 
+    		ID_CARD = #{idCard} AND USER_PHONE <![CDATA[ <> ]]> #{userPhone}
 	</select>
 	
 	<select id="getByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">

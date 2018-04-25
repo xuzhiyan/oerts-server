@@ -38,17 +38,21 @@ import com.njfu.bysj.oerts.entity.JsonResult;
 public class ImageController {
 
 	@PostMapping("/userphoto")
-	public JsonResult upLoadPhoto(@RequestParam MultipartFile userPhoto) throws IOException {
-		String fileType = userPhoto.getContentType(); // image/jpeg 文件类型
-		System.out.println(fileType);
-		String fileName = userPhoto.getOriginalFilename(); // 文件原始名字
-		System.out.println(fileName);
-		System.out.println(ResourceUtils.getURL("classpath:").getPath());
-		System.out.println(ClassUtils.getDefaultClassLoader().getResource("").getPath());
-		File file = new File("data/userphotos/111.txt");
-		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
-		stream.write(111111);
-		stream.close();
+	public JsonResult upLoadPhoto(@RequestParam MultipartFile userPhoto, HttpServletRequest request) throws IOException {
+//		String fileType = userPhoto.getContentType(); // image/jpeg 文件类型
+//		System.out.println(fileType);
+//		String fileName = userPhoto.getOriginalFilename(); // 文件原始名字
+//		System.out.println(fileName);
+//		System.out.println(ResourceUtils.getURL("classpath:").getPath());
+//		System.out.println(ClassUtils.getDefaultClassLoader().getResource("").getPath());
+//		File file = new File("data/userphotos/111.txt");
+//		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+//		stream.write(111111);
+//		stream.close();
+		
+		String basePath = request.getSession().getServletContext().getRealPath("/");
+		System.out.println(basePath);
+		
 		return null;
 	}
 	
