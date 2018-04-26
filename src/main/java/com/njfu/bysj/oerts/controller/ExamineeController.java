@@ -58,7 +58,7 @@ public class ExamineeController {
 		if (examineeService.updateByUserPhone(userInfo)) {
 			return JsonUtil.success();
 		} else {
-			return JsonUtil.failed("用户数据失败");
+			return JsonUtil.failed("更新用户数据失败");
 		}
 	}
 

@@ -9,11 +9,12 @@
  */
 package com.njfu.bysj.oerts.controller;
 
-import java.io.File;
-
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.JSONException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.utils.ImageUtil;
 import com.njfu.bysj.oerts.utils.JsonUtil;
+import com.njfu.bysj.oerts.utils.OcrUtil;
 
 /**
  * @ClassName: PhotoController
@@ -34,21 +36,29 @@ import com.njfu.bysj.oerts.utils.JsonUtil;
 @RestController
 public class ImageController {
 
-	@Value("${images.savepath}")
-	public String Path;
-
-	@PostMapping("/userphoto")
-	public JsonResult upLoadPhoto(@RequestParam MultipartFile image, @RequestParam String userPhone, @RequestParam String fileName)
-			throws IOException {
+	@PostMapping("/images/upload")
+	public JsonResult upLoadImages(@RequestParam MultipartFile image, @RequestParam String userPhone,
+			@RequestParam String fileName, HttpServletRequest request) throws IOException {
 
 		ImageUtil imageUtil = new ImageUtil();
-		String savePath = Path + userPhone + "/";
-		
-		if (imageUtil.saveImage(image, savePath, fileName)) {
-			return JsonUtil.success();
-		} else {
+		String savePath = request.getSession().getServletContext().getRealPath("images/") + userPhone + "/";
+		String result = imageUtil.saveImage(image, savePath, fileName);
+
+		if (result.equals("null")) {
 			return JsonUtil.failed("图片上传失败");
+		} else {
+			return JsonUtil.success(result);
 		}
+	}
+	
+	@GetMapping("/ocrtest")
+	public JsonResult test() throws JSONException {
+		
+//		OcrUtil ocrUtil = new OcrUtil();
+//		ocrUtil.OcrIdCard();
+		
+		
+		return null;
 	}
 
 }

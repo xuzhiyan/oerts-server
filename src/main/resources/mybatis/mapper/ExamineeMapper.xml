@@ -79,7 +79,8 @@
     			ID_CARD = #{idCard},
     			USER_PROFESSION = #{userProfession},
     			EMAIL_ADDRESS = #{emailAddress},
-    			RESIDENTIAL_ADDRESS = #{residentialAddress}
+    			RESIDENTIAL_ADDRESS = #{residentialAddress},
+    			USER_PHOTO = #{userPhoto}
     	WHERE USER_PHONE = #{userPhone}
     </update>
 </mapper>

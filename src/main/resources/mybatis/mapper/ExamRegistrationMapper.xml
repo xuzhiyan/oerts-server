@@ -5,6 +5,8 @@
 		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
 		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
 		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_FRONT" property="idCardFront" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
 	</resultMap>
@@ -13,6 +15,8 @@
 		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
 		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
 		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_FRONT" property="idCardFront" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
 		<!-- 考试信息表字段添加 -->

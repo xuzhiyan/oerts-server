@@ -20,7 +20,3 @@ spring:
     url: jdbc:mysql://localhost:3306/oerts?useSSL=true
     username: root
     password: 123456
-    
-# 上传图片保存路径
-images: 
-  savepath: E:/oertsProj/imgaes/

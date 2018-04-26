@@ -29,6 +29,10 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	private String idCard;
 	/** 考试准考证号 */
 	private String admissionTicket;
+	/** 身份证正面(有照片的一面) */
+	private String idCardFront;
+	/** 身份证反面(有国徽的一面) */
+	private String idCardBack;
 	/** 报名状态 */
 	private String status;
 	/** 考试成绩 */
@@ -92,5 +96,33 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	 */
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	/**
+	 * @return the idCardFront
+	 */
+	public String getIdCardFront() {
+		return idCardFront;
+	}
+
+	/**
+	 * @param idCardFront the idCardFront to set
+	 */
+	public void setIdCardFront(String idCardFront) {
+		this.idCardFront = idCardFront;
+	}
+
+	/**
+	 * @return the idCardBack
+	 */
+	public String getIdCardBack() {
+		return idCardBack;
+	}
+
+	/**
+	 * @param idCardBack the idCardBack to set
+	 */
+	public void setIdCardBack(String idCardBack) {
+		this.idCardBack = idCardBack;
 	}
 }
