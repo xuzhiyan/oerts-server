@@ -9,6 +9,7 @@
  */
 package com.njfu.bysj.oerts.timer;
 
+import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,9 @@ public class TimeScheduler {
 	private ExamRegistrationService examRegistrationService;
 
 	// 每5分钟执行一次
-//	@Scheduled(cron = "0 0/5 * * * ?") // 0 0 2 * * ? 每天早上2点触发
-	public void examReviewScheduler() {
+	// 0 0 2 * * ? 每天早上2点触发
+//	@Scheduled(cron = "0 0/1 * * * ?") 
+	public void examReviewScheduler() throws JSONException {
 		logger.info("============审核考试信息Service启动============");
 		examRegistrationService.examReview();
 	}

@@ -9,6 +9,8 @@
  */
 package com.njfu.bysj.oerts.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +38,9 @@ public class ExamRegistrationController {
 	@Autowired
 	private ExamRegistrationService examRegistrationService;
 
-	@GetMapping("/registration/{examId}/{idCard}")
-	public JsonResult examRegistByIdCardAndExamID(@PathVariable String examId, @PathVariable String idCard) {
-		if (examRegistrationService.examRegistByIdCardAndExamID(examId, idCard)) {
+	@PostMapping("/exam/registration/regist")
+	public JsonResult examRegistByIdCardAndExamID(@RequestBody ExamRegistrationEntity regist, HttpServletRequest request) {
+		if (examRegistrationService.examRegistByIdCardAndExamID(regist, request)) {
 			return JsonUtil.success();
 		} else {
 			return JsonUtil.failed("报名失败");

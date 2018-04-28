@@ -121,7 +121,17 @@ where
 	and TER.STATUS = '10'
 
 
-
+SELECT
+    		TER.ID_CARD,
+    		TER.EXAM_ID,
+    		TER.ID_CARD_FRONT,
+    		TER.ID_CARD_BACK,
+    		TE.USER_NAME
+    	FROM
+    		T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAMINEE TE
+    		ON TE.ID_CARD = TER.ID_CARD
+    	WHERE TER.STATUS = '00'
 
 
 

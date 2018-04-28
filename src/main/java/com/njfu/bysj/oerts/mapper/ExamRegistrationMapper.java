@@ -14,6 +14,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
+import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 /**
@@ -32,7 +33,7 @@ public interface ExamRegistrationMapper {
 
 	List<CompleteRegistExam> completeResgistList(String idCard);
 
-	List<ExamRegistrationEntity> examReview();
+	List<ExamineeRegistInfo> examReview();
 
 	int updateReview(ExamRegistrationEntity registration);
 

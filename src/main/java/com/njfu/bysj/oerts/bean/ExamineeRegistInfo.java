@@ -1,27 +1,27 @@
 /**
- * @FileName:		CompleteRegistExam.java
+ * @FileName:		ExamineeRegistInfo.java
  * @Description:	TODO
  *
  * @author         	徐至彦
  * @version        	V1.0
- * @Date           	2018年4月18日 下午10:14:34
+ * @Date           	2018年4月29日 上午12:17:46
  *
  */
 package com.njfu.bysj.oerts.bean;
 
 import java.io.Serializable;
 
-import com.njfu.bysj.oerts.entity.ExamManagementEntity;
+import com.njfu.bysj.oerts.entity.ExamineeEntity;
 
 /**
- * @ClassName: CompleteRegistExam
+ * @ClassName: ExamineeRegistInfo
  * @Description: TODO
  *
  * @author: 徐至彦
- * @date: 2018年4月18日 下午10:14:34
+ * @date: 2018年4月29日 上午12:17:46
  *
  */
-public class CompleteRegistExam extends ExamManagementEntity implements Serializable {
+public class ExamineeRegistInfo extends ExamineeEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -71,6 +71,36 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	}
 
 	/**
+	 * @return the idCardFront
+	 */
+	public String getIdCardFront() {
+		return idCardFront;
+	}
+
+	/**
+	 * @param idCardFront
+	 *            the idCardFront to set
+	 */
+	public void setIdCardFront(String idCardFront) {
+		this.idCardFront = idCardFront;
+	}
+
+	/**
+	 * @return the idCardBack
+	 */
+	public String getIdCardBack() {
+		return idCardBack;
+	}
+
+	/**
+	 * @param idCardBack
+	 *            the idCardBack to set
+	 */
+	public void setIdCardBack(String idCardBack) {
+		this.idCardBack = idCardBack;
+	}
+
+	/**
 	 * @return the status
 	 */
 	public String getStatus() {
@@ -101,34 +131,6 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	}
 
 	/**
-	 * @return the idCardFront
-	 */
-	public String getIdCardFront() {
-		return idCardFront;
-	}
-
-	/**
-	 * @param idCardFront the idCardFront to set
-	 */
-	public void setIdCardFront(String idCardFront) {
-		this.idCardFront = idCardFront;
-	}
-
-	/**
-	 * @return the idCardBack
-	 */
-	public String getIdCardBack() {
-		return idCardBack;
-	}
-
-	/**
-	 * @param idCardBack the idCardBack to set
-	 */
-	public void setIdCardBack(String idCardBack) {
-		this.idCardBack = idCardBack;
-	}
-
-	/**
 	 * @return the examId
 	 */
 	public String getExamId() {
@@ -141,4 +143,5 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	public void setExamId(String examId) {
 		this.examId = examId;
 	}
+
 }

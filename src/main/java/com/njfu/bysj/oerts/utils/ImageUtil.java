@@ -10,11 +10,9 @@
 package com.njfu.bysj.oerts.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -46,7 +44,6 @@ public class ImageUtil {
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
 		}
-
 		FileOutputStream out = new FileOutputStream(savePath + fileName + fileType);
 
 		out.write(multipartFile.getBytes());

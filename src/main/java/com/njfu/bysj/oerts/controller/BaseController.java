@@ -9,13 +9,10 @@
  */
 package com.njfu.bysj.oerts.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.njfu.bysj.oerts.entity.ExamineeEntity;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamineeService;
 import com.njfu.bysj.oerts.utils.JsonUtil;

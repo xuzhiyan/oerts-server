@@ -13,8 +13,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONException;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.utils.ImageUtil;
 import com.njfu.bysj.oerts.utils.JsonUtil;
-import com.njfu.bysj.oerts.utils.OcrUtil;
 
 /**
  * @ClassName: PhotoController
@@ -41,7 +38,7 @@ public class ImageController {
 			@RequestParam String fileName, HttpServletRequest request) throws IOException {
 
 		ImageUtil imageUtil = new ImageUtil();
-		String savePath = request.getSession().getServletContext().getRealPath("images/") + userPhone + "/";
+		String savePath = request.getSession().getServletContext().getRealPath("images/") + userPhone + "\\";
 		String result = imageUtil.saveImage(image, savePath, fileName);
 
 		if (result.equals("null")) {
@@ -49,16 +46,6 @@ public class ImageController {
 		} else {
 			return JsonUtil.success(result);
 		}
-	}
-	
-	@GetMapping("/ocrtest")
-	public JsonResult test() throws JSONException {
-		
-//		OcrUtil ocrUtil = new OcrUtil();
-//		ocrUtil.OcrIdCard();
-		
-		
-		return null;
 	}
 
 }

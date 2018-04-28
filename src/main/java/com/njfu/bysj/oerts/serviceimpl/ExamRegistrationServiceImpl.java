@@ -11,15 +11,18 @@ package com.njfu.bysj.oerts.serviceimpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
+import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
-import com.njfu.bysj.oerts.entity.ExamineeEntity;
 import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
-import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
+import com.njfu.bysj.oerts.utils.OcrUtil;
 
 /**
  * @ClassName: ExamRegistrationServiceImpl
@@ -36,13 +39,18 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	private ExamRegistrationMapper examRegistrationMapper;
 
 	@Override
-	public boolean examRegistByIdCardAndExamID(String examId, String idCard) {
+	public boolean examRegistByIdCardAndExamID(ExamRegistrationEntity regist, HttpServletRequest request) {
+
+		String savePath = request.getSession().getServletContext().getRealPath("images/");
 		ExamRegistrationEntity registration = new ExamRegistrationEntity();
-		registration.setExamId(examId);
-		registration.setIdCard(idCard);
+
+		registration.setExamId(regist.getExamId());
+		registration.setIdCard(regist.getIdCard());
 		registration.setStatus("00");
 		registration.setAdmissionTicket("");
 		registration.setScore(0);
+		registration.setIdCardFront(savePath + regist.getIdCardFront());
+		registration.setIdCardBack(savePath + regist.getIdCardBack());
 		if (examRegistrationMapper.examRegistByIdCardAndExamID(registration) != 0) {
 			return true;
 		} else {
@@ -65,14 +73,26 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public void examReview() {
-		List<ExamRegistrationEntity> reviewEntity = examRegistrationMapper.examReview();
-		// if 审核成功 status = 10
-		for (ExamRegistrationEntity entities : reviewEntity) {
-			entities.setStatus("10");
-			examRegistrationMapper.updateReview(entities);
+	public void examReview() throws JSONException {
+		List<ExamineeRegistInfo> reviewEntity = examRegistrationMapper.examReview();
+		OcrUtil ocrUtil = new OcrUtil();
+		
+		for (ExamineeRegistInfo entities : reviewEntity) {
+			ExamRegistrationEntity updateEntity = new ExamRegistrationEntity();
+			updateEntity.setExamId(entities.getExamId());
+			updateEntity.setIdCard(entities.getIdCard());
+			String ocrResult = ocrUtil.OcrIdCard(entities.getIdCardFront(), "front");
+			if (ocrResult.equals(entities.getUserName() + entities.getIdCard())) {
+				// if 审核成功 status = 10
+				updateEntity.setStatus("10");
+				examRegistrationMapper.updateReview(updateEntity);
+			} else {
+				// 审核失败 status = 11
+				updateEntity.setStatus("11");
+				examRegistrationMapper.updateReview(updateEntity);
+			}
 		}
-		// 审核失败 status = 11
+		
 
 	}
 

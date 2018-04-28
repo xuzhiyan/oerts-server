@@ -30,9 +30,32 @@
 		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
 		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
 	</resultMap>
+	
+	<resultMap id="ExamineeRegistMap" type="com.njfu.bysj.oerts.bean.ExamineeRegistInfo">
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
+		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_FRONT" property="idCardFront" jdbcType="VARCHAR"/>
+		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
+		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
+		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<!-- 考生信息表字段添加 -->
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR"/>
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+		<result column="USER_SEX" property="userSex" jdbcType="INTEGER"/>
+		<result column="USER_PROFESSION" property="userProfession" jdbcType="VARCHAR"/>
+		<result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR"/>
+		<result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR"/>
+		<result column="USER_PHOTO" property="userPhoto" jdbcType="VARCHAR"/>
+		<result column="RESIDENTIAL_ADDRESS" property="residentialAddress" jdbcType="VARCHAR"/>
+		<result column="EMAIL_ADDRESS" property="emailAddress" jdbcType="VARCHAR"/>
+		<result column="USER_BALANCE" property="userBalance" jdbcType="VARCHAR"/>
+		<result column="LAST_LOGIN_TIME" property="lastLogintime" jdbcType="TIMESTAMP"/>
+	</resultMap>
 	 
 	<sql id="Base_Column_List" >
-        ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE
+        ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE,ID_CARD_FRONT,ID_CARD_BACK
     </sql> 
     
     <select id="countByIdCardAndExamID" parameterType="java.lang.String" resultType="INTEGER">
@@ -45,9 +68,9 @@
     
     <insert id="examRegistByIdCardAndExamID" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
     	INSERT INTO T_EXAM_REGISTRATION
-    		(ID_CARD, EXAM_ID, ADMISSION_TICKET, STATUS, SCORE)
+    		(ID_CARD, EXAM_ID, ADMISSION_TICKET, STATUS, SCORE, ID_CARD_FRONT, ID_CARD_BACK)
     	VALUES 
-    		(#{idCard}, #{examId}, #{admissionTicket}, #{status}, #{score})
+    		(#{idCard}, #{examId}, #{admissionTicket}, #{status}, #{score}, #{idCardFront}, #{idCardBack})
     </insert>
     
     <select id="completeResgistList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
@@ -59,12 +82,18 @@
     	WHERE TER.ID_CARD = #{idCard}
     </select>
     
-    <select id="examReview" resultMap="BaseResultMap">
+    <select id="examReview" resultMap="ExamineeRegistMap">
     	SELECT
-    		ID_CARD, EXAM_ID
+    		TER.ID_CARD,
+    		TER.EXAM_ID,
+    		TER.ID_CARD_FRONT,
+    		TER.ID_CARD_BACK,
+    		TE.USER_NAME
     	FROM
-    		T_EXAM_REGISTRATION
-    	WHERE STATUS = '00'
+    		T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAMINEE TE
+    		ON TE.ID_CARD = TER.ID_CARD
+    	WHERE TER.STATUS = '00'
     </select>
     
     <select id="getPayList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
