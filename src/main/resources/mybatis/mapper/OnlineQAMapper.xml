@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.OnlineQAMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.OnlineQAEntity">
+		<result column="QUESTION_ID" property="questionId" jdbcType="VARCHAR"/>
+		<result column="QUESTION_CONTENT" property="questionContent" jdbcType="VARCHAR"/>
+		<result column="QUESTION_ANSWER" property="questionAnswer" jdbcType="VARCHAR"/>
+		<result column="QUESTION_KEY" property="questionKey" jdbcType="VARCHAR"/>
+		<result column="QUESTION_CLICK_RATE" property="questionClickRate" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+        QUESTION_ID,QUESTION_CONTENT,QUESTION_ANSWER,QUESTION_KEY,QUESTION_CLICK_RATE
+    </sql>
+    
+    <select id="getCommonQuestion" resultMap="BaseResultMap">
+    	SELECT
+    		QUESTION_ID, QUESTION_CONTENT, QUESTION_ANSWER
+    	FROM
+    		T_QUESTION_MANAGEMENT
+    	ORDER BY QUESTION_CLICK_RATE DESC
+    	LIMIT 3
+    </select>
+    
+    <select id="getQuestionById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	SELECT
+    		QUESTION_ID, QUESTION_CONTENT, QUESTION_ANSWER
+    	FROM
+    		T_QUESTION_MANAGEMENT
+    	WHERE
+    		QUESTION_ID = #{questionId}
+    </select>
+    
+    <select id="getAllQuestion" resultMap="BaseResultMap">
+    	SELECT
+    		QUESTION_ID, QUESTION_CONTENT, QUESTION_ANSWER, QUESTION_KEY
+    	FROM
+    		T_QUESTION_MANAGEMENT
+    </select>
+	
+</mapper>
