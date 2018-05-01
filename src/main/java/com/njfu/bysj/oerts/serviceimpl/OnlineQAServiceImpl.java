@@ -39,11 +39,6 @@ public class OnlineQAServiceImpl implements OnlineQAService {
 	}
 
 	@Override
-	public OnlineQAEntity getQuestionById(String questionId) {
-		return onlineQAMapper.getQuestionById(questionId);
-	}
-
-	@Override
 	public OnlineQAEntity getAnswerByKey(String question) {
 		List<OnlineQAEntity> allQuestion =  onlineQAMapper.getAllQuestion();
 		OnlineQAEntity result = new OnlineQAEntity();
@@ -54,6 +49,12 @@ public class OnlineQAServiceImpl implements OnlineQAService {
 					result.setQuestionId(entities.getQuestionId());
 					result.setQuestionContent(entities.getQuestionContent());
 					result.setQuestionAnswer(entities.getQuestionAnswer());
+					
+					// 更新热度
+					OnlineQAEntity updateEntity = new OnlineQAEntity();
+					updateEntity.setQuestionId(entities.getQuestionId());
+					updateEntity.setQuestionClickRate(entities.getQuestionClickRate() + 1);
+					onlineQAMapper.updateClickRateById(updateEntity);
 				}
 			}
 		}

@@ -27,9 +27,9 @@ import com.baidu.aip.ocr.AipOcr;
 public class OcrUtil {
 
 	// 设置APPID/AK/SK：百度云自己的帐号信息
-	public static final String APP_ID = "11161394";
-	public static final String API_KEY = "vmpB3BsW8zbZK1fXRcpNGDME";
-	public static final String SECRET_KEY = "R4f3dBjKbBKm3azzmZWkPG2R2rVzTWiv";
+	public static final String APP_ID = "";
+	public static final String API_KEY = "";
+	public static final String SECRET_KEY = "";
 
 	public String OcrIdCard(String path, String side) throws JSONException {
 

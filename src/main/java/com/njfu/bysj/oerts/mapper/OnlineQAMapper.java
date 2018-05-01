@@ -29,4 +29,5 @@ public interface OnlineQAMapper {
 	
 	OnlineQAEntity getQuestionById(String questionId);
 	
+	int updateClickRateById(OnlineQAEntity update);
 }

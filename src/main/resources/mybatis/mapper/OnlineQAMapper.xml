@@ -33,9 +33,17 @@
     
     <select id="getAllQuestion" resultMap="BaseResultMap">
     	SELECT
-    		QUESTION_ID, QUESTION_CONTENT, QUESTION_ANSWER, QUESTION_KEY
+    		*
     	FROM
     		T_QUESTION_MANAGEMENT
     </select>
+    
+    <update id="updateClickRateById" parameterType="com.njfu.bysj.oerts.entity.OnlineQAEntity">
+    	UPDATE T_QUESTION_MANAGEMENT
+    		SET	QUESTION_CLICK_RATE = #{questionClickRate}
+    	WHERE 
+    		QUESTION_ID = #{questionId}
+    		
+    </update>
 	
 </mapper>

@@ -24,8 +24,6 @@ import com.njfu.bysj.oerts.entity.OnlineQAEntity;
 public interface OnlineQAService {
 
 	List<OnlineQAEntity> getCommonQuestion();
-	
-	OnlineQAEntity getQuestionById(String questionId);
 
 	OnlineQAEntity getAnswerByKey(String question);
 }
