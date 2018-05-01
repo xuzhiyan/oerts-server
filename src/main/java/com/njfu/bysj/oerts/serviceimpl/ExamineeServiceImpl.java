@@ -9,6 +9,7 @@
  */
 package com.njfu.bysj.oerts.serviceimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,19 @@ public class ExamineeServiceImpl implements ExamineeService {
 	private ExamineeMapper examineeMapper;
 
 	@Override
-	public List<ExamineeEntity> getAll() {
+	public List<ExamineeEntity> getAllExaminee() {
 
-		return examineeMapper.getAll();
+		List<ExamineeEntity> allExaminee = examineeMapper.getAllExaminee();
+		List<ExamineeEntity> results = new ArrayList<>();
+		for(ExamineeEntity entities : allExaminee) {
+			entities.setLoginPassword("******");
+			entities.setUserPhone(entities.getUserPhone().substring(0, 4) + "********");
+			if (!entities.getIdCard().equals("")) {
+				entities.setIdCard(entities.getIdCard().substring(0, 4) + "***************");
+			}
+			results.add(entities);
+		}
+		return results;
 	}
 
 	@Override

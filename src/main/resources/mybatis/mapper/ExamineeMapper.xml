@@ -20,7 +20,7 @@
         ID_CARD,USER_PHONE,USER_NAME,USER_SEX,USER_PROFESSION,LOGIN_PASSWORD,PAY_PASSWORD,USER_PHOTO,RESIDENTIAL_ADDRESS,EMAIL_ADDRESS,USER_BALANCE,LAST_LOGIN_TIME
     </sql> 
     
-    <select id="getAll" resultMap="BaseResultMap">
+    <select id="getAllExaminee" resultMap="BaseResultMap">
        SELECT 
        *
 	   FROM T_EXAMINEE
@@ -66,9 +66,9 @@
     
     <insert id="registByPassw" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
     	INSERT INTO T_EXAMINEE
-    		(USER_PHONE, USER_NAME, LOGIN_PASSWORD)
+    		(USER_PHONE, USER_NAME, LOGIN_PASSWORD, ID_CARD)
     	VALUES 
-    		(#{userPhone}, #{userName}, #{loginPassword})
+    		(#{userPhone}, #{userName}, #{loginPassword}, "")
     </insert>
     
     <update id="updateByUserPhone" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">

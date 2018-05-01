@@ -23,7 +23,7 @@ import com.njfu.bysj.oerts.entity.ExamineeEntity;
  */
 public interface ExamineeService {
 
-	List<ExamineeEntity> getAll();
+	List<ExamineeEntity> getAllExaminee();
 
 	int selectCount();
 

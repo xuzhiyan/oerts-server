@@ -26,4 +26,6 @@ public interface ExamManagementService {
 	List<ExamManagementEntity> getAllExams();
 	
 	ExamManagementEntity getExamById(String examId);
+	
+	boolean addExam(ExamManagementEntity add);
 }

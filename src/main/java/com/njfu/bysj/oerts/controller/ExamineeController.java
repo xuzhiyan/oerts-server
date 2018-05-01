@@ -71,4 +71,9 @@ public class ExamineeController {
 	public JsonResult getByUserPhone(@PathVariable String userPhone) {
 		return JsonUtil.success(examineeService.getByUserPhone(userPhone));
 	}
+	
+	@GetMapping("/examinee/list/all")
+	public JsonResult getAllExaminee() {
+		return JsonUtil.success(examineeService.getAllExaminee());
+	}
 }

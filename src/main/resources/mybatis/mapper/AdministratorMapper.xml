@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.AdministratorMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.AdministratorEntity">
+		<result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR"/>
+		<result column="LOGIN_PASSWORD" property="loginPassword" jdbcType="VARCHAR"/>
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+        ACCOUNT_NAME,LOGIN_PASSWORD,USER_NAME
+    </sql>
+    
+    <select id="administratorLoginByPassw" parameterType="com.njfu.bysj.oerts.entity.AdministratorEntity" resultMap="BaseResultMap">
+    	SELECT 
+    		*
+    	FROM T_ADMINISTRATOR
+    	WHERE 
+    		ACCOUNT_NAME = #{accountName} AND LOGIN_PASSWORD = #{loginPassword}
+    </select>
+    
+</mapper>

@@ -11,10 +11,15 @@
 		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
 		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
 		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_INTRODUCE" property="examIntroduce" jdbcType="VARCHAR"/>
+		<result column="REGIST_NUM" property="registNum" jdbcType="INTEGER"/>
+		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
+		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
+		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<sql id="Base_Column_List" >
-        EXAM_ID,EXAM_NAME,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_FROM,EXAM_TIME_TO,REG_TIME_FROM,REG_TIME_TO
+        EXAM_ID,EXAM_NAME,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_FROM,EXAM_TIME_TO,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE
     </sql>
     
     <select id="getAllExams" resultMap="BaseResultMap">
@@ -31,5 +36,24 @@
     		T_EXAM_MANAGEMENT
     	WHERE EXAM_ID = #{examId}
     </select>
-	
+    
+    
+	<select id="getMaxExamId" resultType="java.lang.String">
+    	SELECT
+    		EXAM_ID
+    	FROM
+    		T_EXAM_MANAGEMENT
+    	ORDER BY EXAM_ID DESC
+    	LIMIT 1
+    </select>
+    
+    <insert id="addExam" parameterType="com.njfu.bysj.oerts.entity.ExamManagementEntity">
+    	INSERT INTO T_EXAM_MANAGEMENT
+			(EXAM_ID, EXAM_NAME, COST, MAX_NUM, EXAM_PLACE, EXAM_TIME_FROM, EXAM_TIME_TO, 
+			REG_TIME_FROM, REG_TIME_TO, EXAM_INTRODUCE, REGIST_NUM, PASE_SCORE, TOTAL_SCORE, IS_CERTIFICATE)
+		VALUES
+			(#{examId}, #{examName}, #{cost}, #{maxNum}, #{examPlace}, #{examTimeFrom}, #{examTimeTo}, 
+			#{regTimeFrom}, #{regTimeTo}, #{examIntroduce}, #{registNum}, #{paseScore}, #{totalScore}, #{isCertificate})
+    </insert>
+    
 </mapper>

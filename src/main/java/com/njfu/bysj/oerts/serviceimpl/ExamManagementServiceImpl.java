@@ -42,4 +42,16 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 		return examManagementMapper.getExamById(examId);
 	}
 
+	@Override
+	public boolean addExam(ExamManagementEntity add) {
+		String maxId = examManagementMapper.getMaxExamId();
+		int addId = Integer.parseInt(maxId) + 1;
+		add.setExamId(addId + "");
+		
+		if (examManagementMapper.addExam(add) == 1) {
+			return true;
+		}
+		return false;
+	}
+
 }

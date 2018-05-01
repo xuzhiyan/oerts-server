@@ -25,7 +25,7 @@ import com.njfu.bysj.oerts.entity.ExamineeEntity;
  */
 public interface ExamineeMapper {
 
-	List<ExamineeEntity> getAll();
+	List<ExamineeEntity> getAllExaminee();
 
 	int selectCount();
 

@@ -26,4 +26,8 @@ public interface ExamManagementMapper {
 	List<ExamManagementEntity> getAllExams();
 	
 	ExamManagementEntity getExamById(String examId);
+	
+	String getMaxExamId();
+	
+	int addExam(ExamManagementEntity add);
 }

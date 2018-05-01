@@ -29,6 +29,11 @@
 		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
 		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
 		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_INTRODUCE" property="examIntroduce" jdbcType="VARCHAR"/>
+		<result column="REGIST_NUM" property="registNum" jdbcType="INTEGER"/>
+		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
+		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
+		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<resultMap id="ExamineeRegistMap" type="com.njfu.bysj.oerts.bean.ExamineeRegistInfo">
