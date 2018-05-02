@@ -36,18 +36,16 @@ public class ExamManagementEntity implements Serializable {
 	private int maxNum;
 	/** 考试地点 */
 	private String examPlace;
-	/** 考试开始时间 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date examTimeFrom;
-	/** 考试结束时间 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date examTimeTo;
+	/** 考试时间段1 */
+	private String examTimePeriod1;
+	/** 考试时间段2 */
+	private String examTimePeriod2;
+	/** 考试时间段3 */
+	private String examTimePeriod3;
 	/** 报名开始时间 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date regTimeFrom;
+	private String regTimeFrom;
 	/** 报名结束时间 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date regTimeTo;
+	private String regTimeTo;
 	/** 考试介绍 */
 	private String examIntroduce;
 	/** 已报名人数 */
@@ -135,66 +133,6 @@ public class ExamManagementEntity implements Serializable {
 	}
 
 	/**
-	 * @return the examTimeFrom
-	 */
-	public Date getExamTimeFrom() {
-		return examTimeFrom;
-	}
-
-	/**
-	 * @param examTimeFrom
-	 *            the examTimeFrom to set
-	 */
-	public void setExamTimeFrom(Date examTimeFrom) {
-		this.examTimeFrom = examTimeFrom;
-	}
-
-	/**
-	 * @return the examTimeTo
-	 */
-	public Date getExamTimeTo() {
-		return examTimeTo;
-	}
-
-	/**
-	 * @param examTimeTo
-	 *            the examTimeTo to set
-	 */
-	public void setExamTimeTo(Date examTimeTo) {
-		this.examTimeTo = examTimeTo;
-	}
-
-	/**
-	 * @return the regTimeFrom
-	 */
-	public Date getRegTimeFrom() {
-		return regTimeFrom;
-	}
-
-	/**
-	 * @param regTimeFrom
-	 *            the regTimeFrom to set
-	 */
-	public void setRegTimeFrom(Date regTimeFrom) {
-		this.regTimeFrom = regTimeFrom;
-	}
-
-	/**
-	 * @return the regTimeTo
-	 */
-	public Date getRegTimeTo() {
-		return regTimeTo;
-	}
-
-	/**
-	 * @param regTimeTo
-	 *            the regTimeTo to set
-	 */
-	public void setRegTimeTo(Date regTimeTo) {
-		this.regTimeTo = regTimeTo;
-	}
-
-	/**
 	 * @return the examIntroduce
 	 */
 	public String getExamIntroduce() {
@@ -267,5 +205,80 @@ public class ExamManagementEntity implements Serializable {
 	 */
 	public void setIsCertificate(String isCertificate) {
 		this.isCertificate = isCertificate;
+	}
+
+	/**
+	 * @return the examTimePeriod1
+	 */
+	public String getExamTimePeriod1() {
+		return examTimePeriod1;
+	}
+
+	/**
+	 * @param examTimePeriod1
+	 *            the examTimePeriod1 to set
+	 */
+	public void setExamTimePeriod1(String examTimePeriod1) {
+		this.examTimePeriod1 = examTimePeriod1;
+	}
+
+	/**
+	 * @return the examTimePeriod2
+	 */
+	public String getExamTimePeriod2() {
+		return examTimePeriod2;
+	}
+
+	/**
+	 * @param examTimePeriod2
+	 *            the examTimePeriod2 to set
+	 */
+	public void setExamTimePeriod2(String examTimePeriod2) {
+		this.examTimePeriod2 = examTimePeriod2;
+	}
+
+	/**
+	 * @return the examTimePeriod3
+	 */
+	public String getExamTimePeriod3() {
+		return examTimePeriod3;
+	}
+
+	/**
+	 * @param examTimePeriod3
+	 *            the examTimePeriod3 to set
+	 */
+	public void setExamTimePeriod3(String examTimePeriod3) {
+		this.examTimePeriod3 = examTimePeriod3;
+	}
+
+	/**
+	 * @return the regTimeFrom
+	 */
+	public String getRegTimeFrom() {
+		return regTimeFrom;
+	}
+
+	/**
+	 * @param regTimeFrom
+	 *            the regTimeFrom to set
+	 */
+	public void setRegTimeFrom(String regTimeFrom) {
+		this.regTimeFrom = regTimeFrom;
+	}
+
+	/**
+	 * @return the regTimeTo
+	 */
+	public String getRegTimeTo() {
+		return regTimeTo;
+	}
+
+	/**
+	 * @param regTimeTo
+	 *            the regTimeTo to set
+	 */
+	public void setRegTimeTo(String regTimeTo) {
+		this.regTimeTo = regTimeTo;
 	}
 }

@@ -7,10 +7,11 @@
 		<result column="COST" property="cost" jdbcType="INTEGER"/>
 		<result column="MAX_NUM" property="maxNum" jdbcType="INTEGER"/>
 		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>
-		<result column="EXAM_TIME_FROM" property="examTimeFrom" jdbcType="TIMESTAMP"/>
-		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
-		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
-		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_TIME_PERIOD1" property="examTimePeriod1" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD2" property="examTimePeriod2" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD3" property="examTimePeriod3" jdbcType="VARCHAR"/>
+		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="VARCHAR"/>
+		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="VARCHAR"/>
 		<result column="EXAM_INTRODUCE" property="examIntroduce" jdbcType="VARCHAR"/>
 		<result column="REGIST_NUM" property="registNum" jdbcType="INTEGER"/>
 		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
@@ -19,7 +20,7 @@
 	</resultMap>
 	
 	<sql id="Base_Column_List" >
-        EXAM_ID,EXAM_NAME,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_FROM,EXAM_TIME_TO,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE
+        EXAM_ID,EXAM_NAME,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_PERIOD1,EXAM_TIME_PERIOD2,EXAM_TIME_PERIOD3,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE
     </sql>
     
     <select id="getAllExams" resultMap="BaseResultMap">
@@ -49,10 +50,10 @@
     
     <insert id="addExam" parameterType="com.njfu.bysj.oerts.entity.ExamManagementEntity">
     	INSERT INTO T_EXAM_MANAGEMENT
-			(EXAM_ID, EXAM_NAME, COST, MAX_NUM, EXAM_PLACE, EXAM_TIME_FROM, EXAM_TIME_TO, 
+			(EXAM_ID, EXAM_NAME, COST, MAX_NUM, EXAM_PLACE, EXAM_TIME_PERIOD1, EXAM_TIME_PERIOD2, EXAM_TIME_PERIOD3,
 			REG_TIME_FROM, REG_TIME_TO, EXAM_INTRODUCE, REGIST_NUM, PASE_SCORE, TOTAL_SCORE, IS_CERTIFICATE)
 		VALUES
-			(#{examId}, #{examName}, #{cost}, #{maxNum}, #{examPlace}, #{examTimeFrom}, #{examTimeTo}, 
+			(#{examId}, #{examName}, #{cost}, #{maxNum}, #{examPlace}, #{examTimePeriod1}, #{examTimePeriod2}, #{examTimePeriod3},
 			#{regTimeFrom}, #{regTimeTo}, #{examIntroduce}, #{registNum}, #{paseScore}, #{totalScore}, #{isCertificate})
     </insert>
     

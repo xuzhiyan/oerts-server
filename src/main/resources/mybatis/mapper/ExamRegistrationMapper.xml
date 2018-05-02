@@ -25,10 +25,11 @@
 		<result column="COST" property="cost" jdbcType="INTEGER"/>
 		<result column="MAX_NUM" property="maxNum" jdbcType="INTEGER"/>
 		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>
-		<result column="EXAM_TIME_FROM" property="examTimeFrom" jdbcType="TIMESTAMP"/>
-		<result column="EXAM_TIME_TO" property="examTimeTo" jdbcType="TIMESTAMP"/>
-		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="TIMESTAMP"/>
-		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="TIMESTAMP"/>
+		<result column="EXAM_TIME_PERIOD1" property="examTimePeriod1" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD2" property="examTimePeriod2" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD3" property="examTimePeriod3" jdbcType="VARCHAR"/>
+		<result column="REG_TIME_FROM" property="regTimeFrom" jdbcType="VARCHAR"/>
+		<result column="REG_TIME_TO" property="regTimeTo" jdbcType="VARCHAR"/>
 		<result column="EXAM_INTRODUCE" property="examIntroduce" jdbcType="VARCHAR"/>
 		<result column="REGIST_NUM" property="registNum" jdbcType="INTEGER"/>
 		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
