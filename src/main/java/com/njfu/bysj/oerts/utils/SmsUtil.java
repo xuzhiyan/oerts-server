@@ -68,4 +68,16 @@ public class SmsUtil {
 
 		return sendSmsResponse;
 	}
+
+	public static String createIdentifycode() {
+
+		// 生成6位随机数
+		String codeStr = "";
+		for (int i = 0; i <= 5; i++) {
+			int random = (int) (Math.random() * 9 + 1);
+			codeStr = codeStr + random;
+		}
+
+		return codeStr;
+	}
 }

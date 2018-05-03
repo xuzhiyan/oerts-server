@@ -30,4 +30,6 @@ public interface ExamManagementMapper {
 	String getMaxExamId();
 	
 	int addExam(ExamManagementEntity add);
+	
+	int updateRegNumById(ExamManagementEntity updateNum);
 }

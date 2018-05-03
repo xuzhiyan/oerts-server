@@ -38,4 +38,6 @@ public interface ExamineeService {
 	ExamineeEntity getByUserPhone(String userPhone);
 	
 	boolean updateByUserPhone(ExamineeEntity userInfo);
+	
+	boolean registByIdentifycode(ExamineeEntity userRegist);
 }

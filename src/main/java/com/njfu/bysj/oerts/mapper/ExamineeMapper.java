@@ -35,7 +35,7 @@ public interface ExamineeMapper {
 
 	int countByIdCard(@Param(value = "idCard") String idCard, @Param(value = "userPhone") String userPhone);
 
-	int registByPassw(ExamineeEntity userRegist);
+	int registByUserPhone(ExamineeEntity userRegist);
 
 	ExamineeEntity getByUserPhone(String userPhone);
 

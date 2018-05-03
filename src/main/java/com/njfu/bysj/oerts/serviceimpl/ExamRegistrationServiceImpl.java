@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
+import com.njfu.bysj.oerts.entity.ExamManagementEntity;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
+import com.njfu.bysj.oerts.mapper.ExamManagementMapper;
 import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
 import com.njfu.bysj.oerts.utils.OcrUtil;
@@ -37,6 +39,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 	@Autowired
 	private ExamRegistrationMapper examRegistrationMapper;
+	@Autowired
+	private ExamManagementMapper examManagementMapper;
 
 	@Override
 	public boolean examRegistByIdCardAndExamID(ExamRegistrationEntity regist, HttpServletRequest request) {
@@ -51,11 +55,22 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		registration.setScore(0);
 		registration.setIdCardFront(savePath + regist.getIdCardFront());
 		registration.setIdCardBack(savePath + regist.getIdCardBack());
-		if (examRegistrationMapper.examRegistByIdCardAndExamID(registration) != 0) {
+
+		// 查看已经报名人数
+		ExamManagementEntity num = examManagementMapper.getExamById(regist.getExamId());
+		int maxNum = num.getMaxNum();
+		int regNum = num.getRegistNum();
+
+		if (regNum < maxNum) {
+			examRegistrationMapper.examRegistByIdCardAndExamID(registration);
+			// 更新报名人数
+			num.setRegistNum(regNum + 1);
+			examManagementMapper.updateRegNumById(num);
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 	@Override
@@ -76,7 +91,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	public void examReview() throws JSONException {
 		List<ExamineeRegistInfo> reviewEntity = examRegistrationMapper.examReview();
 		OcrUtil ocrUtil = new OcrUtil();
-		
+
 		for (ExamineeRegistInfo entities : reviewEntity) {
 			ExamRegistrationEntity updateEntity = new ExamRegistrationEntity();
 			updateEntity.setExamId(entities.getExamId());
@@ -92,7 +107,6 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 				examRegistrationMapper.updateReview(updateEntity);
 			}
 		}
-		
 
 	}
 

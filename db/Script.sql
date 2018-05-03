@@ -15,6 +15,10 @@ CREATE TABLE IF NOT EXISTS T_EXAMINEE (
     PRIMARY KEY (`USER_PHONE`)
 );
 
+alter table t_examinee add IDENTIFY_CODE varchar(8);
+
+ALTER TABLE t_examinee DROP IDENTIFY_CODE;
+
 drop table t_examinee;
 
 select * from T_EXAMINEE;

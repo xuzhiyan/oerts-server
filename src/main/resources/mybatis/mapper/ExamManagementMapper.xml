@@ -48,6 +48,13 @@
     	LIMIT 1
     </select>
     
+    <update id="updateRegNumById" parameterType="com.njfu.bysj.oerts.entity.ExamManagementEntity">
+    	UPDATE T_EXAM_MANAGEMENT
+    		SET REGIST_NUM = #{registNum}
+    	WHERE
+    		EXAM_ID = #{examId}
+    </update>
+    
     <insert id="addExam" parameterType="com.njfu.bysj.oerts.entity.ExamManagementEntity">
     	INSERT INTO T_EXAM_MANAGEMENT
 			(EXAM_ID, EXAM_NAME, COST, MAX_NUM, EXAM_PLACE, EXAM_TIME_PERIOD1, EXAM_TIME_PERIOD2, EXAM_TIME_PERIOD3,

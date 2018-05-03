@@ -67,7 +67,7 @@ public class ExamineeServiceImpl implements ExamineeService {
 	@Override
 	public boolean registByPassw(ExamineeEntity userRegist) {
 		if (examineeMapper.countByUserPhone(userRegist.getUserPhone()) == 0) {
-			examineeMapper.registByPassw(userRegist);
+			examineeMapper.registByUserPhone(userRegist);
 			return true;
 		} else {
 			return false;
@@ -97,5 +97,10 @@ public class ExamineeServiceImpl implements ExamineeService {
 	@Override
 	public int countByIdCard(String idCard, String userPhone) {
 		return examineeMapper.countByIdCard(idCard, userPhone);
+	}
+
+	@Override
+	public boolean registByIdentifycode(ExamineeEntity userRegist) {
+		return examineeMapper.registByUserPhone(userRegist) == 1;
 	}
 }
