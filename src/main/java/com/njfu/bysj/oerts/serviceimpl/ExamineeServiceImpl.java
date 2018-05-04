@@ -38,7 +38,7 @@ public class ExamineeServiceImpl implements ExamineeService {
 
 		List<ExamineeEntity> allExaminee = examineeMapper.getAllExaminee();
 		List<ExamineeEntity> results = new ArrayList<>();
-		for(ExamineeEntity entities : allExaminee) {
+		for (ExamineeEntity entities : allExaminee) {
 			entities.setLoginPassword("******");
 			entities.setUserPhone(entities.getUserPhone().substring(0, 4) + "********");
 			if (!entities.getIdCard().equals("")) {
@@ -102,5 +102,10 @@ public class ExamineeServiceImpl implements ExamineeService {
 	@Override
 	public boolean registByIdentifycode(ExamineeEntity userRegist) {
 		return examineeMapper.registByUserPhone(userRegist) == 1;
+	}
+
+	@Override
+	public boolean updatePasswByUserPhone(ExamineeEntity userInfo) {
+		return examineeMapper.updatePasswByUserPhone(userInfo) == 1;
 	}
 }

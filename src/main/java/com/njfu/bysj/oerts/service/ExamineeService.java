@@ -40,4 +40,6 @@ public interface ExamineeService {
 	boolean updateByUserPhone(ExamineeEntity userInfo);
 	
 	boolean registByIdentifycode(ExamineeEntity userRegist);
+	
+	boolean updatePasswByUserPhone(ExamineeEntity userInfo);
 }

@@ -105,10 +105,10 @@ public class ExamineeController {
 
 		return JsonUtil.success(identify);
 	}
-	
-	@PostMapping("/examinee/update/password")
+
+	@PostMapping("/examinee/update/identifycode")
 	public JsonResult updatePasswByIdentifycode(@RequestBody ExamineeEntity userLogin) throws ClientException {
-		
+
 		String templateCode = SmsUtil.createIdentifycode();
 		String templateParam = "{\"code\":\"" + templateCode + "\"}";
 
@@ -121,5 +121,12 @@ public class ExamineeController {
 		identify.setCode(templateCode);
 
 		return JsonUtil.success(identify);
+	}
+
+	@PostMapping("/examinee/update/password")
+	public JsonResult updatePasswByUserPhone(@RequestBody ExamineeEntity userInfo) {
+
+		examineeService.updatePasswByUserPhone(userInfo);
+		return JsonUtil.success();
 	}
 }

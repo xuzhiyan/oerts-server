@@ -83,4 +83,10 @@
     			USER_PHOTO = #{userPhoto}
     	WHERE USER_PHONE = #{userPhone}
     </update>
+    
+    <update id="updatePasswByUserPhone" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
+    	UPDATE T_EXAMINEE
+    		SET LOGIN_PASSWORD = #{loginPassword}
+    	WHERE USER_PHONE = #{userPhone}
+    </update>
 </mapper>

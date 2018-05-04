@@ -40,4 +40,6 @@ public interface ExamineeMapper {
 	ExamineeEntity getByUserPhone(String userPhone);
 
 	int updateByUserPhone(ExamineeEntity userInfo);
+	
+	int updatePasswByUserPhone(ExamineeEntity userInfo);
 }
