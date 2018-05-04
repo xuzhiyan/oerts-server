@@ -47,7 +47,7 @@ public class ExamineeEntity implements Serializable {
 	/* 电子邮件地址 */
 	private String emailAddress;
 	/* 用户余额 */
-	private String userBalance;
+	private int userBalance;
 	/* 上次登录时间 */
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date lastLogintime;
@@ -203,21 +203,6 @@ public class ExamineeEntity implements Serializable {
 	}
 
 	/**
-	 * @return the userBalance
-	 */
-	public String getUserBalance() {
-		return userBalance;
-	}
-
-	/**
-	 * @param userBalance
-	 *            the userBalance to set
-	 */
-	public void setUserBalance(String userBalance) {
-		this.userBalance = userBalance;
-	}
-
-	/**
 	 * @return the lastLogintime
 	 */
 	public Date getLastLogintime() {
@@ -230,5 +215,19 @@ public class ExamineeEntity implements Serializable {
 	 */
 	public void setLastLogintime(Date lastLogintime) {
 		this.lastLogintime = lastLogintime;
+	}
+
+	/**
+	 * @return the userBalance
+	 */
+	public int getUserBalance() {
+		return userBalance;
+	}
+
+	/**
+	 * @param userBalance the userBalance to set
+	 */
+	public void setUserBalance(int userBalance) {
+		this.userBalance = userBalance;
 	}
 }

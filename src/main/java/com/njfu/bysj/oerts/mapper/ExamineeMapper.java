@@ -42,4 +42,10 @@ public interface ExamineeMapper {
 	int updateByUserPhone(ExamineeEntity userInfo);
 	
 	int updatePasswByUserPhone(ExamineeEntity userInfo);
+	
+	int getBalanceByUserPhone(String userPhone);
+	
+	ExamineeEntity getByIdCard(String idCard);
+	
+	int updateUserBalance(ExamineeEntity payInfo);
 }

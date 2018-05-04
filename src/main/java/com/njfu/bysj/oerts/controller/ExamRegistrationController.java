@@ -9,6 +9,8 @@
  */
 package com.njfu.bysj.oerts.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
+import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
@@ -39,7 +42,8 @@ public class ExamRegistrationController {
 	private ExamRegistrationService examRegistrationService;
 
 	@PostMapping("/exam/registration/regist")
-	public JsonResult examRegistByIdCardAndExamID(@RequestBody ExamRegistrationEntity regist, HttpServletRequest request) {
+	public JsonResult examRegistByIdCardAndExamID(@RequestBody ExamRegistrationEntity regist,
+			HttpServletRequest request) {
 		if (examRegistrationService.examRegistByIdCardAndExamID(regist, request)) {
 			return JsonUtil.success();
 		} else {
@@ -83,5 +87,21 @@ public class ExamRegistrationController {
 		} else {
 			return JsonUtil.success(scoreEntity);
 		}
+	}
+
+	@GetMapping("/registration/score/list/{examId}")
+	public JsonResult getScoreEntryListById(@PathVariable String examId) {
+		return JsonUtil.success(examRegistrationService.getScoreEntryListById(examId));
+	}
+
+	@PostMapping("/registration/score/entry")
+	public JsonResult entryScore(@RequestBody List<ExamineeRegistInfo> scoreInfo) {
+		return JsonUtil.success(examRegistrationService.entryScore(scoreInfo));
+	}
+	
+	@PostMapping("/registration/pay/update")
+	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo) {
+		examRegistrationService.updatePayRegistration(payInfo);
+		return JsonUtil.success();
 	}
 }

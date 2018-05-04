@@ -32,4 +32,8 @@ public interface ExamManagementMapper {
 	int addExam(ExamManagementEntity add);
 	
 	int updateRegNumById(ExamManagementEntity updateNum);
+	
+	List<ExamManagementEntity> getExamByIsEntry(int isEntry);
+	
+	int updateIsEntryById(String examId);
 }

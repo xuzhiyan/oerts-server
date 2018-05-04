@@ -108,4 +108,9 @@ public class ExamineeServiceImpl implements ExamineeService {
 	public boolean updatePasswByUserPhone(ExamineeEntity userInfo) {
 		return examineeMapper.updatePasswByUserPhone(userInfo) == 1;
 	}
+
+	@Override
+	public int getBalanceByUserPhone(String userPhone) {
+		return examineeMapper.getBalanceByUserPhone(userPhone);
+	}
 }

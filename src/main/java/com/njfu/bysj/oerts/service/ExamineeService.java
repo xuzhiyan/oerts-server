@@ -42,4 +42,6 @@ public interface ExamineeService {
 	boolean registByIdentifycode(ExamineeEntity userRegist);
 	
 	boolean updatePasswByUserPhone(ExamineeEntity userInfo);
+	
+	int getBalanceByUserPhone(String userPhone);
 }

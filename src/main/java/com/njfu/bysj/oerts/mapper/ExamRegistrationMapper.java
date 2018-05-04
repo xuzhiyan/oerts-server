@@ -42,4 +42,10 @@ public interface ExamRegistrationMapper {
 	List<CompleteRegistExam> getPayList(@Param(value = "idCard") String idCard, @Param(value = "status") String status);
 
 	CompleteRegistExam getScoreByAdmissionTicket(@Param(value = "admissionTicket") String admissionTicket);
+
+	List<ExamineeRegistInfo> getScoreEntryListById(String examId);
+
+	int entryScore(List<ExamineeRegistInfo> scoreInfo);
+	
+	int updatePayExam(ExamRegistrationEntity payInfo);
 }

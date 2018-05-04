@@ -21,8 +21,10 @@ import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamManagementEntity;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
+import com.njfu.bysj.oerts.entity.ExamineeEntity;
 import com.njfu.bysj.oerts.mapper.ExamManagementMapper;
 import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
+import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
 import com.njfu.bysj.oerts.utils.OcrUtil;
 
@@ -41,6 +43,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	private ExamRegistrationMapper examRegistrationMapper;
 	@Autowired
 	private ExamManagementMapper examManagementMapper;
+	@Autowired
+	private ExamineeMapper examineeMapper;
 
 	@Override
 	public boolean examRegistByIdCardAndExamID(ExamRegistrationEntity regist, HttpServletRequest request) {
@@ -127,5 +131,43 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	@Override
 	public CompleteRegistExam getScoreByAdmissionTicket(String admissionTicket) {
 		return examRegistrationMapper.getScoreByAdmissionTicket(admissionTicket);
+	}
+
+	@Override
+	public List<ExamineeRegistInfo> getScoreEntryListById(String examId) {
+		return examRegistrationMapper.getScoreEntryListById(examId);
+	}
+
+	@Override
+	public int entryScore(List<ExamineeRegistInfo> scoreInfo) {
+		int result = examRegistrationMapper.entryScore(scoreInfo);
+		// 获取更新的那个考试 说明这个考试的成绩已经提交
+		String examId = scoreInfo.get(0).getExamId();
+		// set isEntry = 1
+		examManagementMapper.updateIsEntryById(examId);
+
+		return result;
+	}
+
+	@Override
+	public boolean updatePayRegistration(CompleteRegistExam payInfo) {
+		// 更新考生表中的余额
+		int cost = payInfo.getCost();
+
+		ExamineeEntity userInfo = examineeMapper.getByIdCard(payInfo.getIdCard());
+		int balance = userInfo.getUserBalance();
+		String userPhone = userInfo.getUserPhone();
+
+		userInfo.setUserBalance(balance - cost);
+
+		examineeMapper.updateUserBalance(userInfo);
+		// 更新报名表中的状态和生成准考证
+		ExamRegistrationEntity update = new ExamRegistrationEntity();
+		update.setAdmissionTicket(payInfo.getExamId() + payInfo.getIdCard() + userPhone.substring(7, 11));
+		update.setExamId(payInfo.getExamId());
+		update.setIdCard(payInfo.getIdCard());
+		examRegistrationMapper.updatePayExam(update);
+		
+		return true;
 	}
 }

@@ -56,6 +56,8 @@ public class ExamManagementEntity implements Serializable {
 	private int totalScore;
 	/** 是否有证书 */
 	private String isCertificate;
+	/** 是否已经录入成绩 */
+	private int isEntry;
 
 	/**
 	 * @return the examId
@@ -280,5 +282,19 @@ public class ExamManagementEntity implements Serializable {
 	 */
 	public void setRegTimeTo(String regTimeTo) {
 		this.regTimeTo = regTimeTo;
+	}
+
+	/**
+	 * @return the isEntry
+	 */
+	public int getIsEntry() {
+		return isEntry;
+	}
+
+	/**
+	 * @param isEntry the isEntry to set
+	 */
+	public void setIsEntry(int isEntry) {
+		this.isEntry = isEntry;
 	}
 }

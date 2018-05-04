@@ -129,4 +129,9 @@ public class ExamineeController {
 		examineeService.updatePasswByUserPhone(userInfo);
 		return JsonUtil.success();
 	}
+
+	@GetMapping("/examinee/get/balance/{userPhone}")
+	public JsonResult getBalanceByUserPhone(@PathVariable String userPhone) {
+		return JsonUtil.success(examineeService.getBalanceByUserPhone(userPhone));
+	}
 }

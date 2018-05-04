@@ -35,6 +35,7 @@
 		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
 		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
 		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
+		<result column="IS_ENTRY" property="isEntry" jdbcType="INTEGER"/>
 	</resultMap>
 	
 	<resultMap id="ExamineeRegistMap" type="com.njfu.bysj.oerts.bean.ExamineeRegistInfo">
@@ -126,10 +127,41 @@
     	WHERE ADMISSION_TICKET = #{admissionTicket}
     </select>
     
+    <select id="getScoreEntryListById" resultMap="ExamineeRegistMap" parameterType="java.lang.String" >
+    	SELECT
+			TE.USER_NAME,
+			TE.USER_PHONE,
+			TER.ADMISSION_TICKET,
+			TER.SCORE,
+			TER.EXAM_ID
+		FROM
+			T_EXAM_REGISTRATION TER
+		LEFT JOIN T_EXAMINEE TE ON 
+			TE.ID_CARD = TER.ID_CARD
+		WHERE
+			TER.EXAM_ID = #{examId} and TER.STATUS = '20'
+    </select>
+    
     <update id="updateReview" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
     	UPDATE T_EXAM_REGISTRATION
     		SET STATUS = #{status}
     	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
+    </update>
+    
+    <update id="updatePayExam" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
+    	UPDATE T_EXAM_REGISTRATION
+    		SET STATUS = '20',
+    			ADMISSION_TICKET = #{admissionTicket}
+    	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
+    </update>
+    
+    <update id="entryScore" parameterType="java.util.List">
+    	<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    		UPDATE T_EXAM_REGISTRATION
+    			SET SCORE = ${item.score}
+    		WHERE
+    			ADMISSION_TICKET = ${item.admissionTicket}
+    	</foreach>
     </update>
     
     <delete id="deleteByIdCardAndExamID" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">

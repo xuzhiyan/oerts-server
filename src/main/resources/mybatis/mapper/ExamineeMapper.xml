@@ -48,12 +48,27 @@
     		USER_PHONE = #{userPhone}
 	</select>
 	
+	<select id="getBalanceByUserPhone" parameterType="java.lang.String" resultType="INTEGER">
+		SELECT
+			USER_BALANCE
+		FROM T_EXAMINEE
+			WHERE USER_PHONE = #{userPhone}
+	</select>
+	
 	<select id="countByIdCard" parameterType="java.lang.String" resultType="INTEGER">
 		SELECT 
 			COUNT(*)
 		FROM T_EXAMINEE
 		WHERE 
     		ID_CARD = #{idCard} AND USER_PHONE <![CDATA[ <> ]]> #{userPhone}
+	</select>
+	
+	<select id="getByIdCard" parameterType="java.lang.String" resultMap="BaseResultMap">
+		SELECT 
+			*
+		FROM T_EXAMINEE
+		WHERE 
+    		ID_CARD = #{idCard}
 	</select>
 	
 	<select id="getByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -81,6 +96,12 @@
     			EMAIL_ADDRESS = #{emailAddress},
     			RESIDENTIAL_ADDRESS = #{residentialAddress},
     			USER_PHOTO = #{userPhoto}
+    	WHERE USER_PHONE = #{userPhone}
+    </update>
+    
+    <update id="updateUserBalance" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
+    	UPDATE T_EXAMINEE
+    		SET USER_BALANCE = #{userBalance}
     	WHERE USER_PHONE = #{userPhone}
     </update>
     

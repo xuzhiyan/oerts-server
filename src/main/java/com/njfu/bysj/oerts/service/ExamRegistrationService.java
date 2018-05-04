@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.json.JSONException;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
+import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 /**
@@ -41,4 +42,10 @@ public interface ExamRegistrationService {
 	List<CompleteRegistExam> getPayList(String idCard, String status);
 
 	CompleteRegistExam getScoreByAdmissionTicket(String admissionTicket);
+	
+	List<ExamineeRegistInfo> getScoreEntryListById(String examId);
+	
+	int entryScore(List<ExamineeRegistInfo> scoreInfo);
+	
+	boolean updatePayRegistration(CompleteRegistExam payInfo);
 }

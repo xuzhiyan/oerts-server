@@ -59,4 +59,9 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 		return false;
 	}
 
+	@Override
+	public List<ExamManagementEntity> getExamByIsEntry(int isEntry) {
+		return examManagementMapper.getExamByIsEntry(isEntry);
+	}
+
 }

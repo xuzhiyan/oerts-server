@@ -43,7 +43,7 @@ public class ExamManagementController {
 		return JsonUtil.success(examManagementService.getAllExams());
 	}
 	
-	@GetMapping("/exam/{examId}")
+	@GetMapping("/exam/info/id/{examId}")
 	public JsonResult getExamById(@PathVariable String examId) {
 		return JsonUtil.success(examManagementService.getExamById(examId));
 	}
@@ -54,6 +54,11 @@ public class ExamManagementController {
 			return JsonUtil.success();
 		}
 		return JsonUtil.failed("录入考试失败");
+	}
+	
+	@GetMapping("/exam/info/{isEntry}")
+	public JsonResult getExamByIsEntry(@PathVariable int isEntry) {
+		return JsonUtil.success(examManagementService.getExamByIsEntry(isEntry));
 	}
 
 }
