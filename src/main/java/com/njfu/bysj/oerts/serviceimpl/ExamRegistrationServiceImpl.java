@@ -62,14 +62,12 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 		// 查看已经报名人数
 		ExamManagementEntity num = examManagementMapper.getExamById(regist.getExamId());
-		int maxNum = num.getMaxNum();
-		int regNum = num.getRegistNum();
 
-		if (regNum < maxNum) {
+		if (num.getRegistNum() < num.getMaxNum()) {
+			// 报名、更新表
 			examRegistrationMapper.examRegistByIdCardAndExamID(registration);
-			// 更新报名人数
-			num.setRegistNum(regNum + 1);
-			examManagementMapper.updateRegNumById(num);
+			// 报名人数增加
+			examManagementMapper.updateRegNumPlusById(regist.getExamId());
 			return true;
 		} else {
 			return false;
@@ -173,7 +171,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		update.setExamId(payInfo.getExamId());
 		update.setIdCard(payInfo.getIdCard());
 		examRegistrationMapper.updatePayExam(update);
-		
+
 		return true;
 	}
 }
