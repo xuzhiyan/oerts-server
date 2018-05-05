@@ -68,6 +68,13 @@
     		EXAM_ID = #{examId}
     </update>
     
+    <update id="updateRegNumMinusById" parameterType="java.lang.String">
+    	UPDATE T_EXAM_MANAGEMENT
+    		SET REGIST_NUM = REGIST_NUM - 1
+    	WHERE
+    		EXAM_ID = #{examId}
+    </update>
+    
     <update id="updateIsEntryById" parameterType="java.lang.String">
     	UPDATE T_EXAM_MANAGEMENT
     		SET IS_ENTRY = 1

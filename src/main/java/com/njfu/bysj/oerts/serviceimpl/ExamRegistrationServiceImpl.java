@@ -109,6 +109,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 				// 审核失败 status = 11
 				updateEntity.setStatus("11");
 				examRegistrationMapper.updateReview(updateEntity);
+				// Exam的报名人数信息减少
+				examManagementMapper.updateRegNumMinusById(entities.getExamId());
 			}
 		}
 
@@ -117,6 +119,10 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	@Override
 	public boolean deleteByIdCardAndExamID(ExamRegistrationEntity delete) {
 		if (examRegistrationMapper.deleteByIdCardAndExamID(delete) != 0) {
+			if (delete.getStatus().equals("00")) {
+				// Exam的报名人数信息减少
+				examManagementMapper.updateRegNumMinusById(delete.getExamId());
+			}
 			return true;
 		} else {
 			return false;
