@@ -104,4 +104,9 @@ public class ExamRegistrationController {
 		examRegistrationService.updatePayRegistration(payInfo);
 		return JsonUtil.success();
 	}
+	
+	@GetMapping("/registration/info/{idCard}/{examId}")
+	public JsonResult getCompleteResgistInfo(@PathVariable String idCard, @PathVariable String examId) {
+		return JsonUtil.success(examRegistrationService.getCompleteResgistInfo(idCard, examId));
+	}
 }

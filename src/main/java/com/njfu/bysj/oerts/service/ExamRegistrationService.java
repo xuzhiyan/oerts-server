@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.JSONException;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
@@ -42,10 +43,12 @@ public interface ExamRegistrationService {
 	List<CompleteRegistExam> getPayList(String idCard, String status);
 
 	CompleteRegistExam getScoreByAdmissionTicket(String admissionTicket);
-	
+
 	List<ExamineeRegistInfo> getScoreEntryListById(String examId);
-	
+
 	int entryScore(List<ExamineeRegistInfo> scoreInfo);
-	
+
 	boolean updatePayRegistration(CompleteRegistExam payInfo);
+
+	CompleteRegistExam getCompleteResgistInfo(String idCard, String examId);
 }

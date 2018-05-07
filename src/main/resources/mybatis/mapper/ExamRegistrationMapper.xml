@@ -82,7 +82,9 @@
     
     <select id="completeResgistList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
     	SELECT
-    		*
+    		TEM.EXAM_ID,
+    		TEM.EXAM_NAME,
+    		TER.STATUS
     	FROM T_EXAM_REGISTRATION TER
     	LEFT JOIN T_EXAM_MANAGEMENT TEM 
     		ON TER.EXAM_ID = TEM.EXAM_ID
@@ -140,6 +142,15 @@
 			TE.ID_CARD = TER.ID_CARD
 		WHERE
 			TER.EXAM_ID = #{examId} and TER.STATUS = '20'
+    </select>
+    
+    <select id="getCompleteResgistInfo" parameterType="java.lang.String" resultMap="CompleteResgistMap">
+    	SELECT
+    		*
+    	FROM T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAM_MANAGEMENT TEM 
+    		ON TER.EXAM_ID = TEM.EXAM_ID
+    	WHERE TER.ID_CARD = #{idCard} AND TER.EXAM_ID = #{examId}
     </select>
     
     <update id="updateReview" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">

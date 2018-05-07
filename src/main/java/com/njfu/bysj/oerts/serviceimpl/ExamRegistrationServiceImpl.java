@@ -171,7 +171,14 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		update.setExamId(payInfo.getExamId());
 		update.setIdCard(payInfo.getIdCard());
 		examRegistrationMapper.updatePayExam(update);
+		
+		// 生成准考证对应的下载文件.html
 
 		return true;
+	}
+
+	@Override
+	public CompleteRegistExam getCompleteResgistInfo(String idCard, String examId) {
+		return examRegistrationMapper.getCompleteResgistInfo(idCard, examId);
 	}
 }
