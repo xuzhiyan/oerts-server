@@ -30,6 +30,8 @@ public class ExamManagementEntity implements Serializable {
 	private String examId;
 	/** 考试名称 */
 	private String examName;
+	/** 考试类型 */
+	private String examType;
 	/** 报名费用 */
 	private int cost;
 	/** 上限人数 */
@@ -292,9 +294,25 @@ public class ExamManagementEntity implements Serializable {
 	}
 
 	/**
-	 * @param isEntry the isEntry to set
+	 * @param isEntry
+	 *            the isEntry to set
 	 */
 	public void setIsEntry(int isEntry) {
 		this.isEntry = isEntry;
+	}
+
+	/**
+	 * @return the examType
+	 */
+	public String getExamType() {
+		return examType;
+	}
+
+	/**
+	 * @param examType
+	 *            the examType to set
+	 */
+	public void setExamType(String examType) {
+		this.examType = examType;
 	}
 }

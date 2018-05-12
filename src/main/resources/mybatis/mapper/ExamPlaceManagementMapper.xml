@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.njfu.bysj.oerts.mapper.ExamPlaceManagementMapper" >
+	<resultMap id="BaseResultMap" type="com.njfu.bysj.oerts.entity.ExamPlaceManagementEntity">
+		<result column="CITY" property="city" jdbcType="VARCHAR"/>
+		<result column="DISTRICT" property="district" jdbcType="VARCHAR"/>
+		<result column="PLACE" property="place" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+        CITY,DISTRICT,PLACE
+    </sql>
+    
+    <select id="getAllExamPlace" resultMap="BaseResultMap">
+    	SELECT 
+    		<include refid="Base_Column_List"/>
+    	FROM
+    		T_EXAM_PLACE_MANAGEMENT
+    </select>
+    
+    <select id="getAllCity" resultMap="BaseResultMap">
+    	SELECT
+    		CITY
+    	FROM
+    		T_EXAM_PLACE_MANAGEMENT
+    	GROUP BY CITY
+    </select>
+    
+    <select id="getDistrictByCity" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	SELECT
+    		DISTRICT
+    	FROM
+    		T_EXAM_PLACE_MANAGEMENT
+    	WHERE
+    		CITY = #{city}
+    	GROUP BY DISTRICT
+    </select>
+    
+    <select id="getPlaceByDistrict" parameterType="java.lang.String" resultMap="BaseResultMap">
+    	SELECT
+    		PLACE
+    	FROM
+    		T_EXAM_PLACE_MANAGEMENT
+    	WHERE
+    		DISTRICT = #{district}
+    </select>
+    
+</mapper>

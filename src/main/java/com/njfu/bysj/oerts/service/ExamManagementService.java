@@ -30,4 +30,6 @@ public interface ExamManagementService {
 	boolean addExam(ExamManagementEntity add);
 	
 	List<ExamManagementEntity> getExamByIsEntry(int isEntry);
+	
+	List<ExamManagementEntity> getExamByType(String examType);
 }

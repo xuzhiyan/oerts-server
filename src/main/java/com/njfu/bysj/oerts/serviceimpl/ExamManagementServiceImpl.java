@@ -64,4 +64,9 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 		return examManagementMapper.getExamByIsEntry(isEntry);
 	}
 
+	@Override
+	public List<ExamManagementEntity> getExamByType(String examType) {
+		return examManagementMapper.getExamByType(examType);
+	}
+
 }

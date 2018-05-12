@@ -61,4 +61,8 @@ public class ExamManagementController {
 		return JsonUtil.success(examManagementService.getExamByIsEntry(isEntry));
 	}
 
+	@GetMapping("/exam/info/type/{examType}")
+	public JsonResult getExamByType(@PathVariable String examType) {
+		return JsonUtil.success(examManagementService.getExamByType(examType));
+	}
 }
