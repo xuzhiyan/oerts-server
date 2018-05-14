@@ -49,7 +49,7 @@ public interface ExamRegistrationService {
 
 	int entryScore(List<ExamineeRegistInfo> scoreInfo);
 
-	boolean updatePayRegistration(CompleteRegistExam payInfo);
+	boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request);
 
 	CompleteRegistExam getCompleteResgistInfo(String idCard, String examId);
 }

@@ -60,6 +60,8 @@ public class ExamManagementEntity implements Serializable {
 	private String isCertificate;
 	/** 是否已经录入成绩 */
 	private int isEntry;
+	/** 考场人数 */
+	private int hallNum;
 
 	/**
 	 * @return the examId
@@ -314,5 +316,19 @@ public class ExamManagementEntity implements Serializable {
 	 */
 	public void setExamType(String examType) {
 		this.examType = examType;
+	}
+
+	/**
+	 * @return the hallNum
+	 */
+	public int getHallNum() {
+		return hallNum;
+	}
+
+	/**
+	 * @param hallNum the hallNum to set
+	 */
+	public void setHallNum(int hallNum) {
+		this.hallNum = hallNum;
 	}
 }

@@ -9,6 +9,8 @@
 		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<result column="ROOM_NUM" property="roomNum" jdbcType="INTEGER"/>
+		<result column="SET_NUM" property="setNum" jdbcType="INTEGER"/>
 	</resultMap>
 	
 	<resultMap id="CompleteResgistMap" type="com.njfu.bysj.oerts.bean.CompleteRegistExam">
@@ -19,6 +21,8 @@
 		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<result column="ROOM_NUM" property="roomNum" jdbcType="INTEGER"/>
+		<result column="SET_NUM" property="setNum" jdbcType="INTEGER"/>
 		<!-- 考试信息表字段添加 -->
 		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
 		<result column="EXAM_NAME" property="examName" jdbcType="VARCHAR"/>
@@ -37,6 +41,7 @@
 		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
 		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
 		<result column="IS_ENTRY" property="isEntry" jdbcType="INTEGER"/>
+		<result column="HALL_NUM" property="hallNum" jdbcType="INTEGER"/>
 	</resultMap>
 	
 	<resultMap id="ExamineeRegistMap" type="com.njfu.bysj.oerts.bean.ExamineeRegistInfo">
@@ -47,6 +52,8 @@
 		<result column="ID_CARD_BACK" property="idCardBack" jdbcType="VARCHAR"/>
 		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
 		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<result column="ROOM_NUM" property="roomNum" jdbcType="INTEGER"/>
+		<result column="SET_NUM" property="setNum" jdbcType="INTEGER"/>
 		<!-- 考生信息表字段添加 -->
 		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
 		<result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR"/>
@@ -63,7 +70,7 @@
 	</resultMap>
 	 
 	<sql id="Base_Column_List" >
-        ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE,ID_CARD_FRONT,ID_CARD_BACK
+        ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE,ID_CARD_FRONT,ID_CARD_BACK,ROOM_NUM,SET_NUM
     </sql> 
     
     <select id="countByIdCardAndExamID" parameterType="java.lang.String" resultType="INTEGER">
@@ -105,6 +112,19 @@
     	LEFT JOIN T_EXAMINEE TE
     		ON TE.ID_CARD = TER.ID_CARD
     	WHERE TER.STATUS = '00'
+    </select>
+    
+    <select id="getRASInfo" parameterType="java.lang.String" resultMap="CompleteResgistMap">
+    	SELECT 
+    		TER.ROOM_NUM,
+    		TER.SET_NUM,
+    		TEM.HALL_NUM
+    	FROM T_EXAM_REGISTRATION TER
+    	LEFT JOIN T_EXAM_MANAGEMENT TEM 
+    		ON TER.EXAM_ID = TEM.EXAM_ID
+    	WHERE TEM.EXAM_ID = #{examId} AND TER.STATUS = '20'
+    	ORDER BY TER.ROOM_NUM DESC, TER.SET_NUM DESC 
+    	LIMIT 1
     </select>
     
     <select id="getPayList" parameterType="java.lang.String" resultMap="CompleteResgistMap">
@@ -164,7 +184,9 @@
     <update id="updatePayExam" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">
     	UPDATE T_EXAM_REGISTRATION
     		SET STATUS = '20',
-    			ADMISSION_TICKET = #{admissionTicket}
+    			ADMISSION_TICKET = #{admissionTicket},
+    			ROOM_NUM = #{roomNum},
+    			SET_NUM = #{setNum}
     	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
     </update>
     

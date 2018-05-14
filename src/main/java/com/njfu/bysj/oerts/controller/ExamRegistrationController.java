@@ -100,8 +100,8 @@ public class ExamRegistrationController {
 	}
 	
 	@PostMapping("/registration/pay/update")
-	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo) {
-		examRegistrationService.updatePayRegistration(payInfo);
+	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo, HttpServletRequest request) {
+		examRegistrationService.updatePayRegistration(payInfo, request);
 		return JsonUtil.success();
 	}
 	

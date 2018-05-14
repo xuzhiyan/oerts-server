@@ -39,7 +39,15 @@ public class TimeScheduler {
 	// 0 0 2 * * ? 每天早上2点触发
 //	@Scheduled(cron = "0 0/1 * * * ?") 
 	public void examReviewScheduler() throws JSONException, ClientException {
-		logger.info("============审核考试信息Service启动============");
+		logger.info("============审核考生信息Service启动============");
 		examRegistrationService.examReview();
+	}
+	
+	// 每5分钟执行一次
+	// 0 0 2 * * ? 每天早上2点触发
+//	@Scheduled(cron = "0 0/1 * * * ?") 
+	public void examOverduePayScheduler() throws JSONException, ClientException {
+		logger.info("============提取超过缴费时间进行操作Service启动============");
+//		examRegistrationService.examReview();
 	}
 }

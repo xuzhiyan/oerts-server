@@ -19,10 +19,11 @@
 		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
 		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
 		<result column="IS_ENTRY" property="isEntry" jdbcType="INTEGER"/>
+		<result column="HALL_NUM" property="hallNum" jdbcType="INTEGER"/>
 	</resultMap>
 	
 	<sql id="Base_Column_List" >
-        EXAM_ID,EXAM_NAME,EXAM_TYPE,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_PERIOD1,EXAM_TIME_PERIOD2,EXAM_TIME_PERIOD3,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE,IS_ENTRY
+        EXAM_ID,EXAM_NAME,EXAM_TYPE,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_PERIOD1,EXAM_TIME_PERIOD2,EXAM_TIME_PERIOD3,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE,IS_ENTRY,HALL_NUM
     </sql>
     
     <select id="getAllExams" resultMap="BaseResultMap">
@@ -101,10 +102,10 @@
     <insert id="addExam" parameterType="com.njfu.bysj.oerts.entity.ExamManagementEntity">
     	INSERT INTO T_EXAM_MANAGEMENT
 			(EXAM_ID, EXAM_NAME, EXAM_TYPE, COST, MAX_NUM, EXAM_PLACE, EXAM_TIME_PERIOD1, EXAM_TIME_PERIOD2, EXAM_TIME_PERIOD3,
-			REG_TIME_FROM, REG_TIME_TO, EXAM_INTRODUCE, REGIST_NUM, PASE_SCORE, TOTAL_SCORE, IS_CERTIFICATE, IS_ENTRY)
+			REG_TIME_FROM, REG_TIME_TO, EXAM_INTRODUCE, REGIST_NUM, PASE_SCORE, TOTAL_SCORE, IS_CERTIFICATE, IS_ENTRY, HALL_NUM)
 		VALUES
 			(#{examId}, #{examName}, #{examType}, #{cost}, #{maxNum}, #{examPlace}, #{examTimePeriod1}, #{examTimePeriod2}, #{examTimePeriod3},
-			#{regTimeFrom}, #{regTimeTo}, #{examIntroduce}, #{registNum}, #{paseScore}, #{totalScore}, #{isCertificate}, 0)
+			#{regTimeFrom}, #{regTimeTo}, #{examIntroduce}, #{registNum}, #{paseScore}, #{totalScore}, #{isCertificate}, 0, #{hallNum})
     </insert>
     
 </mapper>

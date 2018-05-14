@@ -51,4 +51,6 @@ public interface ExamRegistrationMapper {
 
 	CompleteRegistExam getCompleteResgistInfo(@Param(value = "idCard") String idCard,
 			@Param(value = "examId") String examId);
+	
+	CompleteRegistExam getRASInfo(String examId);
 }

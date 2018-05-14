@@ -39,6 +39,10 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	private String status;
 	/** 考试成绩 */
 	private int score;
+	/** 考场号 */
+	private int roomNum;
+	/** 座位号 */
+	private int setNum;
 
 	/**
 	 * @return the idCard
@@ -140,5 +144,33 @@ public class CompleteRegistExam extends ExamManagementEntity implements Serializ
 	 */
 	public void setExamId(String examId) {
 		this.examId = examId;
+	}
+
+	/**
+	 * @return the roomNum
+	 */
+	public int getRoomNum() {
+		return roomNum;
+	}
+
+	/**
+	 * @param roomNum the roomNum to set
+	 */
+	public void setRoomNum(int roomNum) {
+		this.roomNum = roomNum;
+	}
+
+	/**
+	 * @return the setNum
+	 */
+	public int getSetNum() {
+		return setNum;
+	}
+
+	/**
+	 * @param setNum the setNum to set
+	 */
+	public void setSetNum(int setNum) {
+		this.setNum = setNum;
 	}
 }

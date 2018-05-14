@@ -28,6 +28,7 @@ import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
 import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
 import com.njfu.bysj.oerts.utils.OcrUtil;
+import com.njfu.bysj.oerts.utils.RasUtil;
 import com.njfu.bysj.oerts.utils.SmsUtil;
 
 /**
@@ -161,7 +162,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public boolean updatePayRegistration(CompleteRegistExam payInfo) {
+	public boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request) {
 		// 更新考生表中的余额
 		int cost = payInfo.getCost();
 
@@ -177,10 +178,14 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		update.setAdmissionTicket(payInfo.getExamId() + payInfo.getIdCard() + userPhone.substring(7, 11));
 		update.setExamId(payInfo.getExamId());
 		update.setIdCard(payInfo.getIdCard());
+		// 生成座位号
+		RasUtil rasUtil = new RasUtil();
+		int[] res = rasUtil.createRoomAndSeat(examRegistrationMapper.getRASInfo(payInfo.getExamId()));
+		update.setRoomNum(res[0]);
+		update.setSetNum(res[1]);
 		examRegistrationMapper.updatePayExam(update);
-		
 		// 生成准考证对应的下载文件.html
-
+		
 		return true;
 	}
 
