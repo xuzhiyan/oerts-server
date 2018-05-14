@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.annotations.Param;
 import org.json.JSONException;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
@@ -36,7 +37,7 @@ public interface ExamRegistrationService {
 
 	List<CompleteRegistExam> completeResgistList(String idCard);
 
-	void examReview() throws JSONException;
+	void examReview() throws JSONException, ClientException;
 
 	boolean deleteByIdCardAndExamID(ExamRegistrationEntity delete);
 

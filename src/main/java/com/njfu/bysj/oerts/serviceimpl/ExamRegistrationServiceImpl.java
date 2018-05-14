@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aliyuncs.exceptions.ClientException;
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamManagementEntity;
@@ -27,6 +28,7 @@ import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
 import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
 import com.njfu.bysj.oerts.utils.OcrUtil;
+import com.njfu.bysj.oerts.utils.SmsUtil;
 
 /**
  * @ClassName: ExamRegistrationServiceImpl
@@ -90,7 +92,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public void examReview() throws JSONException {
+	public void examReview() throws JSONException, ClientException {
 		List<ExamineeRegistInfo> reviewEntity = examRegistrationMapper.examReview();
 		OcrUtil ocrUtil = new OcrUtil();
 
@@ -99,16 +101,21 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 			updateEntity.setExamId(entities.getExamId());
 			updateEntity.setIdCard(entities.getIdCard());
 			String ocrResult = ocrUtil.OcrIdCard(entities.getIdCardFront(), "front");
+			String examName = examManagementMapper.getExamById(entities.getExamId()).getExamName();
 			if (ocrResult.equals(entities.getUserName() + entities.getIdCard())) {
 				// if 审核成功 status = 10
 				updateEntity.setStatus("10");
 				examRegistrationMapper.updateReview(updateEntity);
+				// 发送审核情况短信
+				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277", "{\"name\":\"" + examName + "\" , \"status\":\"审核通过\"}");
 			} else {
 				// 审核失败 status = 11
 				updateEntity.setStatus("11");
 				examRegistrationMapper.updateReview(updateEntity);
 				// Exam的报名人数信息减少
 				examManagementMapper.updateRegNumMinusById(entities.getExamId());
+				// 发送审核情况短信
+				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277", "{\"name\":\"" + examName + "\" , \"status\":\"审核未通过\"}");
 			}
 		}
 
