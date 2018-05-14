@@ -22,6 +22,7 @@
 		<!-- 考试信息表字段添加 -->
 		<result column="EXAM_ID" property="examId" jdbcType="VARCHAR"/>
 		<result column="EXAM_NAME" property="examName" jdbcType="VARCHAR"/>
+		<result column="EXAM_TYPE" property="examType" jdbcType="VARCHAR"/>
 		<result column="COST" property="cost" jdbcType="INTEGER"/>
 		<result column="MAX_NUM" property="maxNum" jdbcType="INTEGER"/>
 		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>

@@ -30,4 +30,8 @@ public interface ExamPlaceManagementService {
 	List<ExamPlaceManagementEntity> getDistrictByCity(String city);
 
 	List<ExamPlaceManagementEntity> getPlaceByDistrict(String district);
+	
+	int deleteExamPlace(ExamPlaceManagementEntity delete);
+	
+	boolean addExamPlace(ExamPlaceManagementEntity add);
 }

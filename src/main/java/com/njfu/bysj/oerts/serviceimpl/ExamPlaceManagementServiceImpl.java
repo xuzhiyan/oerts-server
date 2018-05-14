@@ -52,4 +52,20 @@ public class ExamPlaceManagementServiceImpl implements ExamPlaceManagementServic
 		return examPlaceManagementMapper.getPlaceByDistrict(district);
 	}
 
+	@Override
+	public int deleteExamPlace(ExamPlaceManagementEntity delete) {
+		return examPlaceManagementMapper.deleteExamPlace(delete);
+	}
+
+	@Override
+	public boolean addExamPlace(ExamPlaceManagementEntity add) {
+		int result = examPlaceManagementMapper.countExamPlace(add);
+		if (result == 1) {
+			return false;
+		} else {
+			examPlaceManagementMapper.addExamPlace(add);
+			return true;
+		}
+	}
+
 }
