@@ -128,6 +128,41 @@ public class FmUtil {
 		createHtml(savePath, "report", map, "ExamReport.ftl");
 	}
 
+	public void createScoreReport(String savePath, FtlInfo info) throws IOException, TemplateException {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("userPhoto", "../../.." + info.getUserPhoto().substring(6));
+		map.put("examName", info.getExamName());
+		map.put("userName", info.getUserName());
+		map.put("idCard", info.getIdCard());
+		map.put("admissionTicket", info.getAdmissionTicket());
+		map.put("examType", info.getExamType());
+		map.put("score", info.getScore());
+		map.put("paseScore", info.getPaseScore());
+		map.put("totalScore", info.getTotalScore());
+		if (info.getIsCertificate().equals("1")) {
+			map.put("isCertificate", "是");
+		} else {
+			map.put("isCertificate", "否");
+		}
+
+		createHtml(savePath, info.getAdmissionTicket(), map, "ScoreReport.ftl");
+	}
+	
+	public void createCertificate(String savePath, FtlInfo info) throws IOException, TemplateException {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("userPhoto", "../../.." + info.getUserPhoto().substring(6));
+		map.put("examName", info.getExamName());
+		map.put("userName", info.getUserName());
+		map.put("idCard", info.getIdCard());
+		map.put("admissionTicket", info.getAdmissionTicket());
+		
+		createHtml(savePath, info.getAdmissionTicket(), map, "Certificate.ftl");
+	}
+
 	public void createHtml(String savePath, String htmlName, Map<String, Object> map, String templateName)
 			throws IOException, TemplateException {
 

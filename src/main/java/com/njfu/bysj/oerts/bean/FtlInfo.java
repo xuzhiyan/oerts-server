@@ -49,6 +49,12 @@ public class FtlInfo implements Serializable {
 	private String examTimePeriod2;
 	/** 考试时间段3 */
 	private String examTimePeriod3;
+	/** 考试通过分数 */
+	private int paseScore;
+	/** 考试总分数 */
+	private int totalScore;
+	/** 是否有证书 */
+	private String isCertificate;
 
 	/**
 	 * @return the idCard
@@ -242,6 +248,48 @@ public class FtlInfo implements Serializable {
 	 */
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
+	}
+
+	/**
+	 * @return the paseScore
+	 */
+	public int getPaseScore() {
+		return paseScore;
+	}
+
+	/**
+	 * @param paseScore the paseScore to set
+	 */
+	public void setPaseScore(int paseScore) {
+		this.paseScore = paseScore;
+	}
+
+	/**
+	 * @return the totalScore
+	 */
+	public int getTotalScore() {
+		return totalScore;
+	}
+
+	/**
+	 * @param totalScore the totalScore to set
+	 */
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+	}
+
+	/**
+	 * @return the isCertificate
+	 */
+	public String getIsCertificate() {
+		return isCertificate;
+	}
+
+	/**
+	 * @param isCertificate the isCertificate to set
+	 */
+	public void setIsCertificate(String isCertificate) {
+		this.isCertificate = isCertificate;
 	}
 
 }

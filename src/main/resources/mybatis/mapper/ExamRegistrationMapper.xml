@@ -83,6 +83,9 @@
 		<result column="ROOM_NUM" property="roomNum" jdbcType="INTEGER"/>
 		<result column="SET_NUM" property="setNum" jdbcType="INTEGER"/>
 		<result column="USER_PHOTO" property="userPhoto" jdbcType="VARCHAR"/>
+		<result column="PASE_SCORE" property="paseScore" jdbcType="INTEGER"/>
+		<result column="TOTAL_SCORE" property="totalScore" jdbcType="INTEGER"/>
+		<result column="IS_CERTIFICATE" property="isCertificate" jdbcType="VARCHAR"/>
 	</resultMap>
 	 
 	<sql id="Base_Column_List" >
@@ -159,7 +162,10 @@
     <select id="getScoreByAdmissionTicket" parameterType="java.lang.String" resultMap="CompleteResgistMap">
     	SELECT 
 			TEM.EXAM_NAME,
-    		TER.SCORE
+    		TER.SCORE,
+    		TEM.IS_CERTIFICATE,
+    		TEM.EXAM_ID,
+    		TEM.PASE_SCORE
     	FROM
     		T_EXAM_REGISTRATION TER
     	LEFT JOIN T_EXAM_MANAGEMENT TEM
@@ -171,6 +177,7 @@
     	SELECT
 			TE.USER_NAME,
 			TE.USER_PHONE,
+			TE.ID_CARD,
 			TER.ADMISSION_TICKET,
 			TER.SCORE,
 			TER.EXAM_ID
@@ -216,6 +223,26 @@
 		    TEM.EXAM_TIME_PERIOD1,
 			TEM.EXAM_TIME_PERIOD2,
 			TEM.EXAM_TIME_PERIOD3
+		FROM T_EXAMINEE TE
+		LEFT JOIN T_EXAM_REGISTRATION TER
+			ON TE.ID_CARD = TER.ID_CARD
+		LEFT JOIN T_EXAM_MANAGEMENT TEM
+			ON TER.EXAM_ID = TEM.EXAM_ID
+		WHERE TER.ID_CARD = #{idCard} and TER.EXAM_ID = #{examId}
+    </select>
+    
+    <select id="getScoreReportInfo" parameterType="java.lang.String" resultMap="ftlInfoMap">
+    	SELECT 
+			TE.USER_NAME,
+			TE.USER_PHOTO,
+			TER.ADMISSION_TICKET,
+			TER.ID_CARD,
+			TEM.EXAM_NAME,
+			TEM.EXAM_TYPE,
+			TEM.TOTAL_SCORE,
+			TEM.PASE_SCORE,
+			TEM.IS_CERTIFICATE,
+			TER.SCORE
 		FROM T_EXAMINEE TE
 		LEFT JOIN T_EXAM_REGISTRATION TER
 			ON TE.ID_CARD = TER.ID_CARD

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.aliyuncs.exceptions.ClientException;
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
+import com.njfu.bysj.oerts.bean.FtlInfo;
 import com.njfu.bysj.oerts.entity.ExamManagementEntity;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 import com.njfu.bysj.oerts.entity.ExamineeEntity;
@@ -159,6 +160,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	@Override
 	public int entryScore(List<ExamineeRegistInfo> scoreInfo, HttpServletRequest request)
 			throws IOException, TemplateException {
+
 		int result = examRegistrationMapper.entryScore(scoreInfo);
 		// 获取更新的哪个考试 说明这个考试的成绩已经提交
 		String examId = scoreInfo.get(0).getExamId();
@@ -167,9 +169,25 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 		// 在录入考试成绩后生成考试报表
 		FmUtil fmUtil = new FmUtil();
+		ExamManagementEntity examInfo = examManagementMapper.getExamById(examId);
 		int paseNum = examRegistrationMapper.getPaseNumById(examId);
-		String savePath = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\report\\";
-		fmUtil.createExamReport(savePath, examManagementMapper.getExamById(examId), examRegistrationMapper.getScoreEntryListById(examId), paseNum);
+		String savePath1 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\examReport\\";
+		fmUtil.createExamReport(savePath1, examInfo, examRegistrationMapper.getScoreEntryListById(examId), paseNum);
+
+		// 生成成绩单和证书
+		String savePath2 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\scoreReport\\";
+		String savePath3 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\certificate\\";
+		for (ExamineeRegistInfo entities : scoreInfo) {
+			FtlInfo reportInfo = examRegistrationMapper.getScoreReportInfo(entities.getIdCard(), entities.getExamId());
+			// 生成成绩单
+			fmUtil.createScoreReport(savePath2, reportInfo);
+
+			// 生成证书
+			if (entities.getScore() >= examInfo.getPaseScore()) {
+				fmUtil.createCertificate(savePath3, reportInfo);
+			}
+		}
+
 		return result;
 	}
 
@@ -202,7 +220,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 		// 生成准考证对应的下载文件.html
 		FmUtil fmUtil = new FmUtil();
-		String savePath = request.getSession().getServletContext().getRealPath("exam/") + payInfo.getExamId() + "\\admissionTicket\\";
+		String savePath = request.getSession().getServletContext().getRealPath("exam/") + payInfo.getExamId()
+				+ "\\admissionTicket\\";
 		fmUtil.createAdmissionTicket(savePath,
 				examRegistrationMapper.getAdmissionTicketInfo(payInfo.getIdCard(), payInfo.getExamId()));
 		return true;
