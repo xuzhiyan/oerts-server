@@ -157,13 +157,19 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public int entryScore(List<ExamineeRegistInfo> scoreInfo) {
+	public int entryScore(List<ExamineeRegistInfo> scoreInfo, HttpServletRequest request)
+			throws IOException, TemplateException {
 		int result = examRegistrationMapper.entryScore(scoreInfo);
-		// 获取更新的那个考试 说明这个考试的成绩已经提交
+		// 获取更新的哪个考试 说明这个考试的成绩已经提交
 		String examId = scoreInfo.get(0).getExamId();
 		// set isEntry = 1
 		examManagementMapper.updateIsEntryById(examId);
 
+		// 在录入考试成绩后生成考试报表
+		FmUtil fmUtil = new FmUtil();
+		int paseNum = examRegistrationMapper.getPaseNumById(examId);
+		String savePath = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\report\\";
+		fmUtil.createExamReport(savePath, examManagementMapper.getExamById(examId), examRegistrationMapper.getScoreEntryListById(examId), paseNum);
 		return result;
 	}
 
@@ -196,7 +202,7 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 
 		// 生成准考证对应的下载文件.html
 		FmUtil fmUtil = new FmUtil();
-		String savePath = request.getSession().getServletContext().getRealPath("exam/") + payInfo.getExamId() + "\\";
+		String savePath = request.getSession().getServletContext().getRealPath("exam/") + payInfo.getExamId() + "\\admissionTicket\\";
 		fmUtil.createAdmissionTicket(savePath,
 				examRegistrationMapper.getAdmissionTicketInfo(payInfo.getIdCard(), payInfo.getExamId()));
 		return true;

@@ -164,7 +164,7 @@
     		T_EXAM_REGISTRATION TER
     	LEFT JOIN T_EXAM_MANAGEMENT TEM
     		ON TER.EXAM_ID = TEM.EXAM_ID
-    	WHERE ADMISSION_TICKET = #{admissionTicket}
+    	WHERE ADMISSION_TICKET = #{admissionTicket} AND IS_ENTRY = 1
     </select>
     
     <select id="getScoreEntryListById" resultMap="ExamineeRegistMap" parameterType="java.lang.String" >
@@ -179,7 +179,18 @@
 		LEFT JOIN T_EXAMINEE TE ON 
 			TE.ID_CARD = TER.ID_CARD
 		WHERE
-			TER.EXAM_ID = #{examId} and TER.STATUS = '20'
+			TER.EXAM_ID = #{examId} AND TER.STATUS = '20'
+    </select>
+    
+    <select id="getPaseNumById" parameterType="java.lang.String" resultType="INTEGER">
+    	SELECT
+    		COUNT(*)
+    	FROM
+			T_EXAM_REGISTRATION TER
+		LEFT JOIN T_EXAM_MANAGEMENT TEM ON 
+			TER.EXAM_ID = TEM.EXAM_ID
+		WHERE
+			TER.EXAM_ID = #{examId} AND TER.STATUS = '20' AND TER.SCORE &gt;= TEM.PASE_SCORE
     </select>
     
     <select id="getCompleteResgistInfo" parameterType="java.lang.String" resultMap="CompleteResgistMap">
@@ -229,11 +240,11 @@
     </update>
     
     <update id="entryScore" parameterType="java.util.List">
-    	<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+    	<foreach collection="scoreInfo" item="item" separator=";">
     		UPDATE T_EXAM_REGISTRATION
-    			SET SCORE = ${item.score}
+    			SET SCORE = #{item.score}
     		WHERE
-    			ADMISSION_TICKET = ${item.admissionTicket}
+    			ADMISSION_TICKET = #{item.admissionTicket} AND EXAM_ID = #{item.examId}
     	</foreach>
     </update>
     

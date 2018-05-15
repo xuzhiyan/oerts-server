@@ -50,7 +50,8 @@ public interface ExamRegistrationService {
 
 	List<ExamineeRegistInfo> getScoreEntryListById(String examId);
 
-	int entryScore(List<ExamineeRegistInfo> scoreInfo);
+	int entryScore(List<ExamineeRegistInfo> scoreInfo, HttpServletRequest request)
+			throws IOException, TemplateException;
 
 	boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request)
 			throws IOException, TemplateException;

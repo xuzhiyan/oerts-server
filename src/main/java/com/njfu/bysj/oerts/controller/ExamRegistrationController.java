@@ -98,17 +98,18 @@ public class ExamRegistrationController {
 	}
 
 	@PostMapping("/registration/score/entry")
-	public JsonResult entryScore(@RequestBody List<ExamineeRegistInfo> scoreInfo) {
-		return JsonUtil.success(examRegistrationService.entryScore(scoreInfo));
+	public JsonResult entryScore(@RequestBody List<ExamineeRegistInfo> scoreInfo, HttpServletRequest request)
+			throws IOException, TemplateException {
+		return JsonUtil.success(examRegistrationService.entryScore(scoreInfo, request));
 	}
-	
+
 	@PostMapping("/registration/pay/update")
 	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo, HttpServletRequest request)
 			throws IOException, TemplateException {
 		examRegistrationService.updatePayRegistration(payInfo, request);
 		return JsonUtil.success();
 	}
-	
+
 	@GetMapping("/registration/info/{idCard}/{examId}")
 	public JsonResult getCompleteResgistInfo(@PathVariable String idCard, @PathVariable String examId) {
 		return JsonUtil.success(examRegistrationService.getCompleteResgistInfo(idCard, examId));

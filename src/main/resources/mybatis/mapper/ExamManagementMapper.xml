@@ -74,8 +74,7 @@
     		REGIST_NUM
     	FROM
     		T_EXAM_MANAGEMENT
-    	WHERE IS_ENTRY = #{isEntry}
-    		
+    	WHERE IS_ENTRY = #{isEntry}	AND TO_DAYS(SUBSTRING(EXAM_TIME_PERIOD1,1,10)) - TO_DAYS(NOW()) &lt; 0
     </select>
     
     <update id="updateRegNumPlusById" parameterType="java.lang.String">

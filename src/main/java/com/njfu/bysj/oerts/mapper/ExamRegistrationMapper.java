@@ -46,7 +46,7 @@ public interface ExamRegistrationMapper {
 
 	List<ExamineeRegistInfo> getScoreEntryListById(String examId);
 
-	int entryScore(List<ExamineeRegistInfo> scoreInfo);
+	int entryScore(@Param("scoreInfo") List<ExamineeRegistInfo> scoreInfo);
 
 	int updatePayExam(ExamRegistrationEntity payInfo);
 
@@ -56,4 +56,6 @@ public interface ExamRegistrationMapper {
 	CompleteRegistExam getRASInfo(String examId);
 
 	FtlInfo getAdmissionTicketInfo(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
+	
+	int getPaseNumById(String examId);
 }
