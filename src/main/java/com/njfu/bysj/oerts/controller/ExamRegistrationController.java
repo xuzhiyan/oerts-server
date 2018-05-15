@@ -9,6 +9,7 @@
  */
 package com.njfu.bysj.oerts.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,8 @@ import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 import com.njfu.bysj.oerts.entity.JsonResult;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
 import com.njfu.bysj.oerts.utils.JsonUtil;
+
+import freemarker.template.TemplateException;
 
 /**
  * @ClassName: ExamRegistrationController
@@ -100,7 +103,8 @@ public class ExamRegistrationController {
 	}
 	
 	@PostMapping("/registration/pay/update")
-	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo, HttpServletRequest request) {
+	public JsonResult updatePayRegistration(@RequestBody CompleteRegistExam payInfo, HttpServletRequest request)
+			throws IOException, TemplateException {
 		examRegistrationService.updatePayRegistration(payInfo, request);
 		return JsonUtil.success();
 	}

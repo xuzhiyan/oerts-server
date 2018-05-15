@@ -9,6 +9,7 @@
  */
 package com.njfu.bysj.oerts.serviceimpl;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +28,12 @@ import com.njfu.bysj.oerts.mapper.ExamManagementMapper;
 import com.njfu.bysj.oerts.mapper.ExamRegistrationMapper;
 import com.njfu.bysj.oerts.mapper.ExamineeMapper;
 import com.njfu.bysj.oerts.service.ExamRegistrationService;
+import com.njfu.bysj.oerts.utils.FmUtil;
 import com.njfu.bysj.oerts.utils.OcrUtil;
 import com.njfu.bysj.oerts.utils.RasUtil;
 import com.njfu.bysj.oerts.utils.SmsUtil;
+
+import freemarker.template.TemplateException;
 
 /**
  * @ClassName: ExamRegistrationServiceImpl
@@ -108,7 +112,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 				updateEntity.setStatus("10");
 				examRegistrationMapper.updateReview(updateEntity);
 				// 发送审核情况短信
-				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277", "{\"name\":\"" + examName + "\" , \"status\":\"审核通过\"}");
+				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277",
+						"{\"name\":\"" + examName + "\" , \"status\":\"审核通过\"}");
 			} else {
 				// 审核失败 status = 11
 				updateEntity.setStatus("11");
@@ -116,7 +121,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 				// Exam的报名人数信息减少
 				examManagementMapper.updateRegNumMinusById(entities.getExamId());
 				// 发送审核情况短信
-				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277", "{\"name\":\"" + examName + "\" , \"status\":\"审核未通过\"}");
+				SmsUtil.sendSms(entities.getUserPhone(), "SMS_134324277",
+						"{\"name\":\"" + examName + "\" , \"status\":\"审核未通过\"}");
 			}
 		}
 
@@ -162,7 +168,8 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	}
 
 	@Override
-	public boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request) {
+	public boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request)
+			throws IOException, TemplateException {
 		// 更新考生表中的余额
 		int cost = payInfo.getCost();
 
@@ -173,19 +180,25 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 		userInfo.setUserBalance(balance - cost);
 
 		examineeMapper.updateUserBalance(userInfo);
+
 		// 更新报名表中的状态和生成准考证
 		ExamRegistrationEntity update = new ExamRegistrationEntity();
 		update.setAdmissionTicket(payInfo.getExamId() + payInfo.getIdCard() + userPhone.substring(7, 11));
 		update.setExamId(payInfo.getExamId());
 		update.setIdCard(payInfo.getIdCard());
+
 		// 生成座位号
 		RasUtil rasUtil = new RasUtil();
 		int[] res = rasUtil.createRoomAndSeat(examRegistrationMapper.getRASInfo(payInfo.getExamId()));
 		update.setRoomNum(res[0]);
 		update.setSetNum(res[1]);
 		examRegistrationMapper.updatePayExam(update);
+
 		// 生成准考证对应的下载文件.html
-		
+		FmUtil fmUtil = new FmUtil();
+		String savePath = request.getSession().getServletContext().getRealPath("exam/") + payInfo.getExamId() + "\\";
+		fmUtil.createAdmissionTicket(savePath,
+				examRegistrationMapper.getAdmissionTicketInfo(payInfo.getIdCard(), payInfo.getExamId()));
 		return true;
 	}
 

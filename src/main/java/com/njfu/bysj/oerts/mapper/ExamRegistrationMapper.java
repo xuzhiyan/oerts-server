@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
+import com.njfu.bysj.oerts.bean.FtlInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 /**
@@ -51,6 +52,8 @@ public interface ExamRegistrationMapper {
 
 	CompleteRegistExam getCompleteResgistInfo(@Param(value = "idCard") String idCard,
 			@Param(value = "examId") String examId);
-	
+
 	CompleteRegistExam getRASInfo(String examId);
+
+	FtlInfo getAdmissionTicketInfo(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
 }

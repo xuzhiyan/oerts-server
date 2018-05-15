@@ -68,6 +68,22 @@
 		<result column="USER_BALANCE" property="userBalance" jdbcType="VARCHAR"/>
 		<result column="LAST_LOGIN_TIME" property="lastLogintime" jdbcType="TIMESTAMP"/>
 	</resultMap>
+	
+	<resultMap id="ftlInfoMap" type="com.njfu.bysj.oerts.bean.FtlInfo">
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+		<result column="ADMISSION_TICKET" property="admissionTicket" jdbcType="VARCHAR"/>
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+		<result column="EXAM_NAME" property="examName" jdbcType="VARCHAR"/>
+		<result column="EXAM_TYPE" property="examType" jdbcType="VARCHAR"/>
+		<result column="EXAM_PLACE" property="examPlace" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD1" property="examTimePeriod1" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD2" property="examTimePeriod2" jdbcType="VARCHAR"/>
+		<result column="EXAM_TIME_PERIOD3" property="examTimePeriod3" jdbcType="VARCHAR"/>
+		<result column="SCORE" property="score" jdbcType="INTEGER"/>
+		<result column="ROOM_NUM" property="roomNum" jdbcType="INTEGER"/>
+		<result column="SET_NUM" property="setNum" jdbcType="INTEGER"/>
+		<result column="USER_PHOTO" property="userPhoto" jdbcType="VARCHAR"/>
+	</resultMap>
 	 
 	<sql id="Base_Column_List" >
         ID_CARD,EXAM_ID,ADMISSION_TICKET,STATUS,SCORE,ID_CARD_FRONT,ID_CARD_BACK,ROOM_NUM,SET_NUM
@@ -173,6 +189,28 @@
     	LEFT JOIN T_EXAM_MANAGEMENT TEM 
     		ON TER.EXAM_ID = TEM.EXAM_ID
     	WHERE TER.ID_CARD = #{idCard} AND TER.EXAM_ID = #{examId}
+    </select>
+    
+    <select id="getAdmissionTicketInfo" parameterType="java.lang.String" resultMap="ftlInfoMap">
+    	SELECT 
+			TE.USER_NAME,
+			TE.USER_PHOTO,
+			TER.ADMISSION_TICKET,
+			TER.ID_CARD,
+			TEM.EXAM_NAME,
+			TEM.EXAM_TYPE,
+			TEM.EXAM_PLACE,
+		    TER.ROOM_NUM,
+		    TER.SET_NUM,
+		    TEM.EXAM_TIME_PERIOD1,
+			TEM.EXAM_TIME_PERIOD2,
+			TEM.EXAM_TIME_PERIOD3
+		FROM T_EXAMINEE TE
+		LEFT JOIN T_EXAM_REGISTRATION TER
+			ON TE.ID_CARD = TER.ID_CARD
+		LEFT JOIN T_EXAM_MANAGEMENT TEM
+			ON TER.EXAM_ID = TEM.EXAM_ID
+		WHERE TER.ID_CARD = #{idCard} and TER.EXAM_ID = #{examId}
     </select>
     
     <update id="updateReview" parameterType="com.njfu.bysj.oerts.entity.ExamRegistrationEntity">

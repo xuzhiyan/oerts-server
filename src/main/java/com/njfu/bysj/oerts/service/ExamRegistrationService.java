@@ -9,6 +9,7 @@
  */
 package com.njfu.bysj.oerts.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,8 @@ import com.aliyuncs.exceptions.ClientException;
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
+
+import freemarker.template.TemplateException;
 
 /**
  * @ClassName: ExamRegistrationService
@@ -49,7 +52,8 @@ public interface ExamRegistrationService {
 
 	int entryScore(List<ExamineeRegistInfo> scoreInfo);
 
-	boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request);
+	boolean updatePayRegistration(CompleteRegistExam payInfo, HttpServletRequest request)
+			throws IOException, TemplateException;
 
 	CompleteRegistExam getCompleteResgistInfo(String idCard, String examId);
 }
