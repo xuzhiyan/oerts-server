@@ -26,11 +26,13 @@
         EXAM_ID,EXAM_NAME,EXAM_TYPE,COST,MAX_NUM,EXAM_PLACE,EXAM_TIME_PERIOD1,EXAM_TIME_PERIOD2,EXAM_TIME_PERIOD3,REG_TIME_FROM,REG_TIME_TO,EXAM_INTRODUCE,REGIST_NUM,PASE_SCORE,TOTAL_SCORE,IS_CERTIFICATE,IS_ENTRY,HALL_NUM
     </sql>
     
-    <select id="getAllExams" resultMap="BaseResultMap">
+    <select id="getAllExams" parameterType="java.lang.String" resultMap="BaseResultMap">
     	SELECT
     		<include refid="Base_Column_List"/>
     	FROM
     		T_EXAM_MANAGEMENT
+    	WHERE
+    		EXAM_TYPE = #{examType}
     </select>
     
     <select id="getExamByType" parameterType="java.lang.String" resultMap="BaseResultMap">

@@ -10,9 +10,6 @@
 package com.njfu.bysj.oerts.entity;
 
 import java.io.Serializable;
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @ClassName: ExamManagementEntity

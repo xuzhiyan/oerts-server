@@ -60,4 +60,6 @@ public interface ExamRegistrationMapper {
 	int getPaseNumById(String examId);
 	
 	FtlInfo getScoreReportInfo(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
+	
+	List<FtlInfo> getExamineeInfoById(String examId);
 }

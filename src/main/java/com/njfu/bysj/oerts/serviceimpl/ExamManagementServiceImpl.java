@@ -33,8 +33,8 @@ public class ExamManagementServiceImpl implements ExamManagementService {
 	private ExamManagementMapper examManagementMapper;
 
 	@Override
-	public List<ExamManagementEntity> getAllExams() {
-		return examManagementMapper.getAllExams();
+	public List<ExamManagementEntity> getAllExams(String examType) {
+		return examManagementMapper.getAllExams(examType);
 	}
 
 	@Override

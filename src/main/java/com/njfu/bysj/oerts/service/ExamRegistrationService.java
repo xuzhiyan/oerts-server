@@ -14,12 +14,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.json.JSONException;
 
 import com.aliyuncs.exceptions.ClientException;
 import com.njfu.bysj.oerts.bean.CompleteRegistExam;
 import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
+import com.njfu.bysj.oerts.bean.FtlInfo;
 import com.njfu.bysj.oerts.entity.ExamRegistrationEntity;
 
 import freemarker.template.TemplateException;
@@ -57,4 +57,6 @@ public interface ExamRegistrationService {
 			throws IOException, TemplateException;
 
 	CompleteRegistExam getCompleteResgistInfo(String idCard, String examId);
+	
+	List<FtlInfo> getExamineeInfoById(String examId);
 }

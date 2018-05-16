@@ -228,7 +228,24 @@
 			ON TE.ID_CARD = TER.ID_CARD
 		LEFT JOIN T_EXAM_MANAGEMENT TEM
 			ON TER.EXAM_ID = TEM.EXAM_ID
-		WHERE TER.ID_CARD = #{idCard} and TER.EXAM_ID = #{examId}
+		WHERE TER.ID_CARD = #{idCard} AND TER.EXAM_ID = #{examId}
+    </select>
+    
+    <select id="getExamineeInfoById" parameterType="java.lang.String" resultMap="ftlInfoMap">
+    	SELECT 
+			TE.USER_NAME,
+			TER.ADMISSION_TICKET,
+			TER.ID_CARD,
+			TEM.EXAM_NAME,
+		    TER.ROOM_NUM,
+		    TER.SET_NUM,
+		    TER.SCORE
+		FROM T_EXAMINEE TE
+		LEFT JOIN T_EXAM_REGISTRATION TER
+			ON TE.ID_CARD = TER.ID_CARD
+		LEFT JOIN T_EXAM_MANAGEMENT TEM
+			ON TER.EXAM_ID = TEM.EXAM_ID
+		WHERE TER.STATUS = '20' AND TER.EXAM_ID = #{examId}
     </select>
     
     <select id="getScoreReportInfo" parameterType="java.lang.String" resultMap="ftlInfoMap">

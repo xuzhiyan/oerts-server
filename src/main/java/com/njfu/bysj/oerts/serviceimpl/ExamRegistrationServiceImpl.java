@@ -231,4 +231,9 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	public CompleteRegistExam getCompleteResgistInfo(String idCard, String examId) {
 		return examRegistrationMapper.getCompleteResgistInfo(idCard, examId);
 	}
+
+	@Override
+	public List<FtlInfo> getExamineeInfoById(String examId) {
+		return examRegistrationMapper.getExamineeInfoById(examId);
+	}
 }

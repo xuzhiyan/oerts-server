@@ -23,7 +23,7 @@ import com.njfu.bysj.oerts.entity.ExamManagementEntity;
  */
 public interface ExamManagementService {
 
-	List<ExamManagementEntity> getAllExams();
+	List<ExamManagementEntity> getAllExams(String examType);
 	
 	ExamManagementEntity getExamById(String examId);
 	
