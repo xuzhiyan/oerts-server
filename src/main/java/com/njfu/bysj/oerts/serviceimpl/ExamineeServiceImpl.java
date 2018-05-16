@@ -113,4 +113,9 @@ public class ExamineeServiceImpl implements ExamineeService {
 	public int getBalanceByUserPhone(String userPhone) {
 		return examineeMapper.getBalanceByUserPhone(userPhone);
 	}
+
+	@Override
+	public int updateUserBalance(ExamineeEntity payInfo) {
+		return examineeMapper.updateUserBalance(payInfo);
+	}
 }

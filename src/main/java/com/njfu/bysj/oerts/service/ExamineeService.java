@@ -44,4 +44,6 @@ public interface ExamineeService {
 	boolean updatePasswByUserPhone(ExamineeEntity userInfo);
 	
 	int getBalanceByUserPhone(String userPhone);
+	
+	int updateUserBalance(ExamineeEntity payInfo);
 }
