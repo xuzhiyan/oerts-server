@@ -47,7 +47,7 @@
     	FROM
     		T_EXAM_MANAGEMENT
     	WHERE
-    		EXAM_TYPE = #{examType} AND TO_DAYS(REG_TIME_TO) - TO_DAYS(NOW()) &gt;= 0
+    		EXAM_TYPE = #{examType} AND TO_DAYS(REG_TIME_TO) - TO_DAYS(NOW()) &gt;= 0 AND TO_DAYS(REG_TIME_FROM) - TO_DAYS(NOW()) &lt;= 0
     </select>
     
     <select id="getExamById" parameterType="java.lang.String" resultMap="BaseResultMap">
