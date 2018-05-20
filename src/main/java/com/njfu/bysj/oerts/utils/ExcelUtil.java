@@ -9,8 +9,12 @@
  */
 package com.njfu.bysj.oerts.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -18,6 +22,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import com.njfu.bysj.oerts.bean.ExamineeRegistInfo;
 import com.njfu.bysj.oerts.bean.FtlInfo;
 
 /**
@@ -113,5 +118,28 @@ public class ExcelUtil {
 
 		fos.close();
 		workbook.close();
+	}
+
+	public static List<ExamineeRegistInfo> readScoreExcel(String savePath, String examId) throws FileNotFoundException, IOException {
+
+		List<ExamineeRegistInfo> result = new ArrayList<>();
+
+		HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(new File(savePath)));
+		HSSFSheet sheet = workbook.getSheetAt(0);
+		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+			HSSFRow row = sheet.getRow(i);
+			ExamineeRegistInfo info = new ExamineeRegistInfo();
+			info.setUserName(row.getCell(0).getStringCellValue());
+			info.setIdCard(row.getCell(1).getStringCellValue());
+			info.setAdmissionTicket(row.getCell(2).getStringCellValue());
+			info.setScore((int)row.getCell(3).getNumericCellValue());
+			info.setExamId(examId);
+
+			result.add(info);
+		}
+
+		workbook.close();
+
+		return result;
 	}
 }
