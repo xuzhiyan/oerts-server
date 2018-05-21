@@ -56,8 +56,10 @@ public class ExcelUtil {
 		cell = row.createCell(2);
 		cell.setCellValue("准考证号");
 		cell = row.createCell(3);
-		cell.setCellValue("考场号");
+		cell.setCellValue("考试成绩");
 		cell = row.createCell(4);
+		cell.setCellValue("考场号");
+		cell = row.createCell(5);
 		cell.setCellValue("座位号");
 
 		// 第五步，写入实体数据，实际应用中这些数据从数据库得到,对象封装数据，集合包对象。对象的属性值对应表的每行的值
@@ -68,8 +70,9 @@ public class ExcelUtil {
 			row1.createCell(0).setCellValue(info.getUserName());
 			row1.createCell(1).setCellValue(info.getIdCard());
 			row1.createCell(2).setCellValue(info.getAdmissionTicket());
-			row1.createCell(3).setCellValue(info.getRoomNum());
-			row1.createCell(4).setCellValue(info.getSetNum());
+			row1.createCell(3).setCellValue(0);
+			row1.createCell(4).setCellValue(info.getRoomNum());
+			row1.createCell(5).setCellValue(info.getSetNum());
 		}
 
 		FileOutputStream fos = new FileOutputStream(savePath);
@@ -120,19 +123,20 @@ public class ExcelUtil {
 		workbook.close();
 	}
 
-	public static List<ExamineeRegistInfo> readScoreExcel(String savePath, String examId) throws FileNotFoundException, IOException {
+	public static List<ExamineeRegistInfo> readScoreExcel(String savePath, String examId)
+			throws FileNotFoundException, IOException {
 
 		List<ExamineeRegistInfo> result = new ArrayList<>();
 
 		HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(new File(savePath)));
 		HSSFSheet sheet = workbook.getSheetAt(0);
-		for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
+		for (int i = 2; i < sheet.getLastRowNum() + 1; i++) {
 			HSSFRow row = sheet.getRow(i);
 			ExamineeRegistInfo info = new ExamineeRegistInfo();
 			info.setUserName(row.getCell(0).getStringCellValue());
 			info.setIdCard(row.getCell(1).getStringCellValue());
 			info.setAdmissionTicket(row.getCell(2).getStringCellValue());
-			info.setScore((int)row.getCell(3).getNumericCellValue());
+			info.setScore((int) row.getCell(3).getNumericCellValue());
 			info.setExamId(examId);
 
 			result.add(info);

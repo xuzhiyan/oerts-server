@@ -162,29 +162,36 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 			throws IOException, TemplateException {
 
 		int result = examRegistrationMapper.entryScore(scoreInfo);
-		// 获取更新的哪个考试 说明这个考试的成绩已经提交
-		String examId = scoreInfo.get(0).getExamId();
-		// set isEntry = 1
-		examManagementMapper.updateIsEntryById(examId);
 
-		// 在录入考试成绩后生成考试报表
-		FmUtil fmUtil = new FmUtil();
-		ExamManagementEntity examInfo = examManagementMapper.getExamById(examId);
-		int paseNum = examRegistrationMapper.getPaseNumById(examId);
-		String savePath1 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\examReport\\";
-		fmUtil.createExamReport(savePath1, examInfo, examRegistrationMapper.getScoreEntryListById(examId), paseNum);
+		if (result != 0) {
+			// 获取更新的哪个考试 说明这个考试的成绩已经提交
+			String examId = scoreInfo.get(0).getExamId();
+			// set isEntry = 1
+			examManagementMapper.updateIsEntryById(examId);
 
-		// 生成成绩单和证书
-		String savePath2 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\scoreReport\\";
-		String savePath3 = request.getSession().getServletContext().getRealPath("exam/") + examId + "\\certificate\\";
-		for (ExamineeRegistInfo entities : scoreInfo) {
-			FtlInfo reportInfo = examRegistrationMapper.getScoreReportInfo(entities.getIdCard(), entities.getExamId());
-			// 生成成绩单
-			fmUtil.createScoreReport(savePath2, reportInfo);
+			// 在录入考试成绩后生成考试报表
+			FmUtil fmUtil = new FmUtil();
+			ExamManagementEntity examInfo = examManagementMapper.getExamById(examId);
+			int paseNum = examRegistrationMapper.getPaseNumById(examId);
+			String savePath1 = request.getSession().getServletContext().getRealPath("exam/") + examId
+					+ "\\examReport\\";
+			fmUtil.createExamReport(savePath1, examInfo, examRegistrationMapper.getScoreEntryListById(examId), paseNum);
 
-			// 生成证书
-			if (entities.getScore() >= examInfo.getPaseScore()) {
-				fmUtil.createCertificate(savePath3, reportInfo);
+			// 生成成绩单和证书
+			String savePath2 = request.getSession().getServletContext().getRealPath("exam/") + examId
+					+ "\\scoreReport\\";
+			String savePath3 = request.getSession().getServletContext().getRealPath("exam/") + examId
+					+ "\\certificate\\";
+			for (ExamineeRegistInfo entities : scoreInfo) {
+				FtlInfo reportInfo = examRegistrationMapper.getScoreReportInfo(entities.getIdCard(),
+						entities.getExamId());
+				// 生成成绩单
+				fmUtil.createScoreReport(savePath2, reportInfo);
+
+				// 生成证书
+				if (entities.getScore() >= examInfo.getPaseScore()) {
+					fmUtil.createCertificate(savePath3, reportInfo);
+				}
 			}
 		}
 
