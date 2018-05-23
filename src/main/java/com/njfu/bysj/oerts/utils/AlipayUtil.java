@@ -63,7 +63,7 @@ public class AlipayUtil {
 		AlipayTradePrecreateModel model = new AlipayTradePrecreateModel();
 		model.setOutTradeNo(outTradeNo);
 		model.setTotalAmount(rechargeNum);
-		model.setSubject("考生报名系统_报名费用");
+		model.setSubject("考生报名系统_账户余额充值");
 		request.setBizModel(model);
 
 		AlipayTradePrecreateResponse response = alipayClient.execute(request);
