@@ -81,9 +81,9 @@
     
     <insert id="registByUserPhone" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">
     	INSERT INTO T_EXAMINEE
-    		(USER_PHONE, USER_NAME, LOGIN_PASSWORD, ID_CARD)
+    		(USER_PHONE, USER_NAME, LOGIN_PASSWORD, ID_CARD, USER_BALANCE)
     	VALUES 
-    		(#{userPhone}, #{userName}, #{loginPassword}, "")
+    		(#{userPhone}, #{userName}, #{loginPassword}, "", 0)
     </insert>
     
     <update id="updateByUserPhone" parameterType="com.njfu.bysj.oerts.entity.ExamineeEntity">

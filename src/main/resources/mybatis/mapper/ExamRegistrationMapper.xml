@@ -246,6 +246,7 @@
 		LEFT JOIN T_EXAM_MANAGEMENT TEM
 			ON TER.EXAM_ID = TEM.EXAM_ID
 		WHERE TER.STATUS = '20' AND TER.EXAM_ID = #{examId}
+		ORDER BY TER.ROOM_NUM ASC, TER.SET_NUM ASC
     </select>
     
     <select id="getScoreReportInfo" parameterType="java.lang.String" resultMap="ftlInfoMap">

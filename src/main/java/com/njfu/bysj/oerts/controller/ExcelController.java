@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -96,20 +98,23 @@ public class ExcelController {
 	public JsonResult uploadScoreExcel(@RequestParam MultipartFile excel, @RequestParam String examId, HttpServletRequest request)
 			throws IOException, TemplateException {
 		
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		
 		// 将上传的excel文件保存至服务器指定目录下
 		String savePath = request.getSession().getServletContext().getRealPath("upload/");
 		File targetFile = new File(savePath);
 		if (!targetFile.exists()) {
 			targetFile.mkdirs();
 		}
-		FileOutputStream out = new FileOutputStream(savePath + excel.getOriginalFilename());
+		String fileName = savePath + df.format(new Date()) + ".xls";
+		FileOutputStream out = new FileOutputStream(fileName);
 		
 		out.write(excel.getBytes());
 		out.flush();
 		out.close();
 		
 		// 读取excel中的信息，将其更新至数据库
-		List<ExamineeRegistInfo> result = ExcelUtil.readScoreExcel(savePath + excel.getOriginalFilename(), examId);
+		List<ExamineeRegistInfo> result = ExcelUtil.readScoreExcel(fileName, examId);
 		
 		return JsonUtil.success(examRegistrationService.entryScore(result, request));
 	}
