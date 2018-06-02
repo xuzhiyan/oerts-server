@@ -284,6 +284,14 @@
     	WHERE ID_CARD = #{idCard} AND EXAM_ID = #{examId}
     </update>
     
+    <update id="examOverdue">
+    	UPDATE T_EXAM_REGISTRATION
+    		SET STATUS = '21'
+		WHERE STATUS <![CDATA[ <> ]]> '20' AND EXAM_ID IN (
+			SELECT EXAM_ID FROM T_EXAM_MANAGEMENT WHERE TO_DAYS(NOW()) - TO_DAYS(REG_TIME_TO) &gt; 0
+		)
+    </update>
+    
     <update id="entryScore" parameterType="java.util.List">
     	<foreach collection="scoreInfo" item="item" separator=";">
     		UPDATE T_EXAM_REGISTRATION

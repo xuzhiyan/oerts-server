@@ -41,6 +41,8 @@ public interface ExamRegistrationService {
 	List<CompleteRegistExam> completeResgistList(String idCard);
 
 	void examReview() throws JSONException, ClientException;
+	
+	void examOverdue();
 
 	boolean deleteByIdCardAndExamID(ExamRegistrationEntity delete);
 

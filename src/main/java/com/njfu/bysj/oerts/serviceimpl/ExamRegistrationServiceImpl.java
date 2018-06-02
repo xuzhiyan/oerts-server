@@ -243,4 +243,9 @@ public class ExamRegistrationServiceImpl implements ExamRegistrationService {
 	public List<FtlInfo> getExamineeInfoById(String examId) {
 		return examRegistrationMapper.getExamineeInfoById(examId);
 	}
+
+	@Override
+	public void examOverdue() {
+		examRegistrationMapper.examOverdue();
+	}
 }

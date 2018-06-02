@@ -62,4 +62,6 @@ public interface ExamRegistrationMapper {
 	FtlInfo getScoreReportInfo(@Param(value = "idCard") String idCard, @Param(value = "examId") String examId);
 	
 	List<FtlInfo> getExamineeInfoById(String examId);
+	
+	int examOverdue();
 }

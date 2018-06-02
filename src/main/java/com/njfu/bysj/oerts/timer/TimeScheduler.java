@@ -48,6 +48,6 @@ public class TimeScheduler {
 //	@Scheduled(cron = "0 0/1 * * * ?") 
 	public void examOverduePayScheduler() throws JSONException, ClientException {
 		logger.info("============提取超过缴费时间进行操作Service启动============");
-//		examRegistrationService.examReview();
+		examRegistrationService.examOverdue();
 	}
 }
